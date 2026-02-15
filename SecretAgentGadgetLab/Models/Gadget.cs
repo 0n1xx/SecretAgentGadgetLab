@@ -9,6 +9,7 @@ namespace SecretAgentGadgetLab.Models
         public string Name { get; set; }
         public string? Description { get; set; }
         [Required]
+        [DisplayFormat(DataFormatString = "{0:c}")] // adds a currency format
         public decimal Price { get; set; }
         public string? Photo { get; set; }
         [Display(Name = "Agent")]

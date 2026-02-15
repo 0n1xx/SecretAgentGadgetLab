@@ -44,8 +44,10 @@ namespace SecretAgentGadgetLab.Controllers
         }
 
         // GET: Agents/Create
-        public IActionResult Create()
+        public async Task<IActionResult> CreateAsync()
         {
+            // Sorting agents by CodeName for the dropdown in the Create view
+            var agents = await _context.Agents.OrderBy(a => a.CodeName).ToListAsync();
             return View();
         }
 

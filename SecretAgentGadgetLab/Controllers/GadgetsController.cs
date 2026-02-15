@@ -23,7 +23,7 @@ namespace SecretAgentGadgetLab.Controllers
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Gadgets.Include(g => g.Agent);
-            return View(await applicationDbContext.ToListAsync());
+            return View(await applicationDbContext.OrderBy(g => g.Name).ToListAsync());
         }
 
         // GET: Gadgets/Details/5
@@ -48,7 +48,7 @@ namespace SecretAgentGadgetLab.Controllers
         // GET: Gadgets/Create
         public IActionResult Create()
         {
-            ViewData["AgentId"] = new SelectList(_context.Agents, "Id", "CodeName");
+            ViewData["AgentId"] = new SelectList(_context.Agents.OrderBy(c => c.CodeName), "Id", "CodeName");
             return View();
         }
 
