@@ -57,10 +57,20 @@ namespace SecretAgentGadgetLab.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,Price,Photo,AgentId")] Gadget gadget)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,Price,AgentId")] Gadget gadget, IFormFile Photo)
         {
             if (ModelState.IsValid)
             {
+                // Check for and process photo upload
+                if (Photo.Length > 0)
+                {
+                    var tempFile = Path.GetTempFileName();
+                    var fileName = Guid.NewGuid() + "." + Photo.FileName;
+                    var uploadPath = System.IO.Directory.GetCurrentDirectory() + "\\wwwroot\\img\\product-uploads\\" + fileName;
+                    using var stream = new FileStream(uploadPath, FileMode.Create);
+                    await Photo.CopyToAsync(stream);
+                    gadget.Photo = fileName;
+                }
                 _context.Add(gadget);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -91,7 +101,7 @@ namespace SecretAgentGadgetLab.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Price,Photo,AgentId")] Gadget gadget)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Price,AgentId")] Gadget gadget, IFormFile Photo)
         {
             if (id != gadget.Id)
             {
@@ -100,6 +110,16 @@ namespace SecretAgentGadgetLab.Controllers
 
             if (ModelState.IsValid)
             {
+                // Check for and process photo upload
+                if (Photo.Length > 0)
+                {
+                    var tempFile = Path.GetTempFileName();
+                    var fileName = Guid.NewGuid() + "." + Photo.FileName;
+                    var uploadPath = System.IO.Directory.GetCurrentDirectory() + "\\wwwroot\\img\\product-uploads\\" + fileName;
+                    using var stream = new FileStream(uploadPath, FileMode.Create);
+                    await Photo.CopyToAsync(stream);
+                    gadget.Photo = fileName;
+                }
                 try
                 {
                     _context.Update(gadget);
