@@ -114,8 +114,9 @@ namespace SecretAgentGadgetLab.Controllers
                 if (Photo.Length > 0)
                 {
                     var tempFile = Path.GetTempFileName();
-                    var fileName = Guid.NewGuid() + "." + Photo.FileName;
-                    var uploadPath = System.IO.Directory.GetCurrentDirectory() + "\\wwwroot\\img\\product-uploads\\" + fileName;
+                    var extension = Path.GetExtension(Photo.FileName);
+                    var fileName = Guid.NewGuid().ToString() + extension;
+                    var uploadPath = System.IO.Directory.GetCurrentDirectory() + "\\img\\product-uploads\\" + fileName;
                     using var stream = new FileStream(uploadPath, FileMode.Create);
                     await Photo.CopyToAsync(stream);
                     gadget.Photo = fileName;

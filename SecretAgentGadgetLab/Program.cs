@@ -44,4 +44,5 @@ app.MapControllerRoute(
 app.MapRazorPages()
    .WithStaticAssets();
 
+app.UseDeveloperExceptionPage();
 app.Run();
