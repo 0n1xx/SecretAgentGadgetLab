@@ -12,3 +12,15 @@ agent gadgets but it's desgined in a user-friendly way.
 
 ## Purpose:
 - This project demonstrates the use of ASP.NET Core MVC architecture. The authentification will be added in the next stage of this ptoject. 
+
+## Future Improvements
+
+In the next iteration of this project, authentication features will be added to enhance security and user management.
+
+Planned improvements include:
+
+* Implementing **user authentication using ASP.NET Core Identity**
+* Adding **Google authentication** for quick sign-in
+* Adding **GitHub authentication** to allow users to log in with their GitHub accounts
+
+These features will improve the overall functionality of the application and demonstrate integration with external authentication providers.
