@@ -11,8 +11,8 @@ using SecretAgentGadgetLab.Models;
 
 namespace SecretAgentGadgetLab.Controllers
 {
-    // Since it's marketplace for secret agents, only authenticated users should be able to access the agent management features and change something. However, the details of agents can be viewed by anyone
-    [Authorize]
+    // Since it's marketplace for secret agents, only administrator users should be able to access the agent management features and change something. However, the details of agents can be viewed by anyone
+    [Authorize(Roles = "Administrator")]
     public class AgentsController : Controller
     {
         private readonly ApplicationDbContext _context;

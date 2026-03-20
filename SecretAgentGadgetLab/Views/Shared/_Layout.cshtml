@@ -21,10 +21,10 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Agents" asp-action="Index">View Agents</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="ViewAgents" asp-action="Index">View Agents</a>
                         </li>
-                        <!-- Only if a user authenticated, they have access to these two views -->
-                        @if (User.Identity.IsAuthenticated)
+                        <!-- Only if a user an administrator, they have access to these two views -->
+                        @if (User.IsInRole("Administrator"))
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Agents" asp-action="Index">Agents</a>

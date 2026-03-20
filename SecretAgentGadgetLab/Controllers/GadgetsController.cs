@@ -11,8 +11,8 @@ using System.Threading.Tasks;
 
 namespace SecretAgentGadgetLab.Controllers
 {
-    // Since it's marketplace for secret agents, only authenticated users should be able to access the gadgets management features and change something. However, the details of gadgets can be viewed by anyone.
-    [Authorize]
+    // Since it's marketplace for secret agents, only administrator users should be able to access the gadgets management features and change something. However, the details of gadgets can be viewed by anyone.
+    [Authorize(Roles = "Administrator")]
     public class GadgetsController : Controller
     {
         private readonly ApplicationDbContext _context;
