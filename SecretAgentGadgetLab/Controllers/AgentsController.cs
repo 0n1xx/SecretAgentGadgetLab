@@ -11,7 +11,7 @@ using SecretAgentGadgetLab.Models;
 
 namespace SecretAgentGadgetLab.Controllers
 {
-    // Since it's marketplace for secret agents, only authenticated users should be able to access the agent management features.
+    // Since it's marketplace for secret agents, only authenticated users should be able to access the agent management features and change something. However, the details of agents can be viewed by anyone
     [Authorize]
     public class AgentsController : Controller
     {
@@ -28,6 +28,7 @@ namespace SecretAgentGadgetLab.Controllers
             return View(await _context.Agents.ToListAsync());
         }
 
+        [AllowAnonymous]
         // GET: Agents/Details/5
         public async Task<IActionResult> Details(int? id)
         {

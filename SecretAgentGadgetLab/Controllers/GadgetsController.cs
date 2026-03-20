@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SecretAgentGadgetLab.Controllers
 {
-    // Since it's marketplace for secret agents, only authenticated users should be able to access the gadgets management features.
+    // Since it's marketplace for secret agents, only authenticated users should be able to access the gadgets management features and change something. However, the details of gadgets can be viewed by anyone.
     [Authorize]
     public class GadgetsController : Controller
     {
