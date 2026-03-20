@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,8 @@ using SecretAgentGadgetLab.Models;
 
 namespace SecretAgentGadgetLab.Controllers
 {
+    // Since it's marketplace for secret agents, only authenticated users should be able to access the agent management features.
+    [Authorize]
     public class AgentsController : Controller
     {
         private readonly ApplicationDbContext _context;

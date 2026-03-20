@@ -1,15 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SecretAgentGadgetLab.Data;
 using SecretAgentGadgetLab.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SecretAgentGadgetLab.Controllers
 {
+    // Since it's marketplace for secret agents, only authenticated users should be able to access the gadgets management features.
+    [Authorize]
     public class GadgetsController : Controller
     {
         private readonly ApplicationDbContext _context;
