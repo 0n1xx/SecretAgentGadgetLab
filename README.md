@@ -4,6 +4,27 @@
 System Agent Gadget Lab is a ASP.NET Core MVC project which is developed as a part of COMP 2084 – Server-Side Scripting (ASP.NET). This web application is made to manage secret Belorussian 
 agent gadgets but it's desgined in a user-friendly way.
 
+## Features:
+- Full CRUD operations for:
+  - Agents
+  - Gadgets
+- Authentication:
+  - Local user registration and login
+  - Google login
+  - GitHub login
+- Authorization:
+  - Only authenticated users can create, edit, or delete data
+  - Anonymous users can view data but cannot modify it
+- Responsive UI with custom styling
+
+## Authentication:
+
+This application uses ASP.NET Identity for authentication:
+- Users can register and log in using email/password
+- Also using registration is supported via:
+  - Google OAuth
+  - GitHub OAuth
+
 ## Used Technologies:
 - ASP.NET core MVC;
 - C#;
