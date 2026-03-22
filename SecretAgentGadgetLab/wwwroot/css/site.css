@@ -34,3 +34,123 @@ body {
 .custom-image{
     width:75px;
 }
+
+/* Setting the properties for body element */
+body {
+    background-color: #050505;
+    color: #d1d5db;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* The main idea here is to make a website with black and lime colours, so it looks like a hacker website :) */
+a {
+    color: #a3ff12;
+    text-decoration: none;
+}
+
+/* Adding a lime colour while hovering */
+a:hover {
+    color: #ccff66;
+}
+
+/* Implicitly changing the colour of the nav bar to black */
+.navbar {
+    background-color: #000 !important;
+    border-bottom: 1px solid #1a1a1a;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.4rem;
+    color: #a3ff12 !important;
+    letter-spacing: 1px;
+}
+
+.nav-link {
+    color: #9ca3af !important;
+}
+
+.nav-link:hover {
+    color: #a3ff12 !important;
+}
+
+/* Changing the colours of h elements */
+h1, h2, h3 {
+    color: #fff;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 600;
+}
+
+p {
+    color: #9ca3af;
+}
+
+.btn-primary {
+    background-color: #a3ff12;
+    color: #000;
+    border: none;
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    background-color: #ccff66;
+}
+
+/* Customizing the table to fit the theme */
+.table {
+    --bs-table-bg: transparent !important;
+}
+
+table {
+    background-color: #000000;
+    border: 1px solid #1f2937;
+}
+
+.table thead {
+    background-color: #020617;
+}
+
+.table thead th {
+    color: #a3ff12 !important;
+    border-bottom: 1px solid #1f2937;
+}
+
+.table td,
+.table th {
+    color: #e5e7eb !important;
+}
+
+.table tbody tr {
+    background-color: #000000;
+    transition: 0.2s;
+}
+
+.table tbody tr:hover {
+    background-color: #020617;
+}
+
+.table td {
+    border-bottom: 1px solid #1f2937;
+}
+
+/* Customizing  the input to fit the theme */
+input, select, textarea {
+    background-color: #000000 !important;
+    color: #a3ff12 !important;
+    border: 1px solid #1f2937 !important;
+}
+
+input:focus {
+    border-color: #a3ff12 !important;
+    box-shadow: 0 0 8px rgba(163, 255, 18, 0.4);
+
+}
+
+/* Working the colours an border tops parameteres to customize the footer */
+footer {
+    border-top: 1px solid #1a1a1a;
+    color: #6b7280;
+}
