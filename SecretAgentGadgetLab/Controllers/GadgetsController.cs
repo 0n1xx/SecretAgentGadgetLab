@@ -11,8 +11,11 @@ using System.Threading.Tasks;
 
 namespace SecretAgentGadgetLab.Controllers
 {
-    // Since it's marketplace for secret agents, only administrator users should be able to access the gadgets management features and change something. However, the details of gadgets can be viewed by anyone.
-    [Authorize(Roles = "Administrator")]
+    /*
+     * In this controller, I implemented the following features:
+     * Create, edit and delete operations are only available to authorized users.
+     * But all users, including unauthorized ones, can view the list of agents and their details.
+     */
     public class GadgetsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,14 +25,13 @@ namespace SecretAgentGadgetLab.Controllers
             _context = context;
         }
 
-        // GET: Gadgets
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Gadgets.Include(g => g.Agent);
             return View(await applicationDbContext.OrderBy(g => g.Name).ToListAsync());
         }
-
-        // GET: Gadgets/Details/5
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -40,6 +42,7 @@ namespace SecretAgentGadgetLab.Controllers
             var gadget = await _context.Gadgets
                 .Include(g => g.Agent)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (gadget == null)
             {
                 return NotFound();
@@ -48,41 +51,42 @@ namespace SecretAgentGadgetLab.Controllers
             return View(gadget);
         }
 
-        // GET: Gadgets/Create
+        // 🔒 Только для авторизованных
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["AgentId"] = new SelectList(_context.Agents.OrderBy(c => c.CodeName), "Id", "CodeName");
             return View();
         }
 
-        // POST: Gadgets/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("Id,Name,Description,Price,AgentId")] Gadget gadget, IFormFile Photo)
         {
             if (ModelState.IsValid)
             {
-                // Check for and process photo upload
-                if (Photo.Length > 0)
+                if (Photo != null && Photo.Length > 0)
                 {
-                    var tempFile = Path.GetTempFileName();
-                    var fileName = Guid.NewGuid() + "." + Photo.FileName;
-                    var uploadPath = System.IO.Directory.GetCurrentDirectory() + "\\wwwroot\\img\\product-uploads\\" + fileName;
+                    var extension = Path.GetExtension(Photo.FileName);
+                    var fileName = Guid.NewGuid().ToString() + extension;
+                    var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img", "product-uploads", fileName);
+
                     using var stream = new FileStream(uploadPath, FileMode.Create);
                     await Photo.CopyToAsync(stream);
+
                     gadget.Photo = fileName;
                 }
+
                 _context.Add(gadget);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["AgentId"] = new SelectList(_context.Agents, "Id", "CodeName", gadget.AgentId);
             return View(gadget);
         }
-
-        // GET: Gadgets/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -95,15 +99,13 @@ namespace SecretAgentGadgetLab.Controllers
             {
                 return NotFound();
             }
+
             ViewData["AgentId"] = new SelectList(_context.Agents, "Id", "CodeName", gadget.AgentId);
             return View(gadget);
         }
-
-        // POST: Gadgets/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Price,AgentId")] Gadget gadget, IFormFile Photo)
         {
             if (id != gadget.Id)
@@ -113,17 +115,18 @@ namespace SecretAgentGadgetLab.Controllers
 
             if (ModelState.IsValid)
             {
-                // Check for and process photo upload
-                if (Photo.Length > 0)
+                if (Photo != null && Photo.Length > 0)
                 {
-                    var tempFile = Path.GetTempFileName();
                     var extension = Path.GetExtension(Photo.FileName);
                     var fileName = Guid.NewGuid().ToString() + extension;
-                    var uploadPath = System.IO.Directory.GetCurrentDirectory() + "\\img\\product-uploads\\" + fileName;
+                    var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img", "product-uploads", fileName);
+
                     using var stream = new FileStream(uploadPath, FileMode.Create);
                     await Photo.CopyToAsync(stream);
+
                     gadget.Photo = fileName;
                 }
+
                 try
                 {
                     _context.Update(gadget);
@@ -140,13 +143,15 @@ namespace SecretAgentGadgetLab.Controllers
                         throw;
                     }
                 }
+
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["AgentId"] = new SelectList(_context.Agents, "Id", "CodeName", gadget.AgentId);
             return View(gadget);
         }
 
-        // GET: Gadgets/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -157,6 +162,7 @@ namespace SecretAgentGadgetLab.Controllers
             var gadget = await _context.Gadgets
                 .Include(g => g.Agent)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (gadget == null)
             {
                 return NotFound();
@@ -165,9 +171,9 @@ namespace SecretAgentGadgetLab.Controllers
             return View(gadget);
         }
 
-        // POST: Gadgets/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var gadget = await _context.Gadgets.FindAsync(id);

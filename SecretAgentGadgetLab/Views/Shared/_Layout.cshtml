@@ -24,18 +24,11 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="ViewAgents" asp-action="Index">View Agents</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Agents" asp-action="Index">Agents</a>
                         </li>
-                        <!-- Only if a user an administrator, they have access to these two views -->
-                        @if (User.IsInRole("Administrator"))
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Agents" asp-action="Index">Agents</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Gadgets" asp-action="Index">Gadgets</a>
-                                </li>
-                            }
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Gadgets" asp-action="Index">Gadgets</a>
+                        </li>
                         </ul>
                     <partial name="_LoginPartial" />
                 </div>
@@ -48,7 +41,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer">
         <div class="container">
             &copy; 2026 - SecretAgentGadgetLab | Vladislav Sakharov | 200625361 | COMP 2084 – Server-Side Scripting (ASP.NET)
         </div>

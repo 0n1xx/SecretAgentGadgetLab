@@ -4,15 +4,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SecretAgentGadgetLab.Data;
 using SecretAgentGadgetLab.Models;
 
 namespace SecretAgentGadgetLab.Controllers
 {
-    // Since it's marketplace for secret agents, only administrator users should be able to access the agent management features and change something. However, the details of agents can be viewed by anyone
-    [Authorize(Roles = "Administrator")]
+    /*
+     * In this controller, I implemented the following features:
+     * Create, edit and delete operations are only available to authorized users.
+     * But all users, including unauthorized ones, can view the list of agents and their details.
+     */
     public class AgentsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -21,15 +23,12 @@ namespace SecretAgentGadgetLab.Controllers
         {
             _context = context;
         }
-
-        // GET: Agents
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Agents.ToListAsync());
         }
-
         [AllowAnonymous]
-        // GET: Agents/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -39,6 +38,7 @@ namespace SecretAgentGadgetLab.Controllers
 
             var agent = await _context.Agents
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (agent == null)
             {
                 return NotFound();
@@ -46,20 +46,14 @@ namespace SecretAgentGadgetLab.Controllers
 
             return View(agent);
         }
-
-        // GET: Agents/Create
-        public async Task<IActionResult> CreateAsync()
+        [Authorize]
+        public IActionResult Create()
         {
-            // Sorting agents by CodeName for the dropdown in the Create view
-            var agents = await _context.Agents.OrderBy(a => a.CodeName).ToListAsync();
             return View();
         }
-
-        // POST: Agents/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("Id,CodeName,CountryCode,Salary")] Agent agent)
         {
             if (ModelState.IsValid)
@@ -70,8 +64,7 @@ namespace SecretAgentGadgetLab.Controllers
             }
             return View(agent);
         }
-
-        // GET: Agents/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,12 +79,9 @@ namespace SecretAgentGadgetLab.Controllers
             }
             return View(agent);
         }
-
-        // POST: Agents/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("Id,CodeName,CountryCode,Salary")] Agent agent)
         {
             if (id != agent.Id)
@@ -121,8 +111,7 @@ namespace SecretAgentGadgetLab.Controllers
             }
             return View(agent);
         }
-
-        // GET: Agents/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -132,6 +121,7 @@ namespace SecretAgentGadgetLab.Controllers
 
             var agent = await _context.Agents
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (agent == null)
             {
                 return NotFound();
@@ -139,10 +129,9 @@ namespace SecretAgentGadgetLab.Controllers
 
             return View(agent);
         }
-
-        // POST: Agents/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var agent = await _context.Agents.FindAsync(id);

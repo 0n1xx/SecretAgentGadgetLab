@@ -149,8 +149,7 @@ input:focus {
 
 }
 
-/* Working the colours an border tops parameteres to customize the footer */
-footer {
-    border-top: 1px solid #1a1a1a;
-    color: #6b7280;
+/* Working the colour parameter to customize the footer */
+footer{
+    color: #d1d5db;
 }
