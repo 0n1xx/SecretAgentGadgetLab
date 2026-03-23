@@ -1,47 +1,44 @@
-# System Agent Gadget Lab
+# SecretAgentGadgetLab
 
-## Overview:
-System Agent Gadget Lab is a ASP.NET Core MVC project which is developed as a part of COMP 2084 – Server-Side Scripting (ASP.NET). This web application is made to manage secret Belorussian 
-agent gadgets but it's desgined in a user-friendly way.
+## Overview
+SecretAgentGadgetLab is an ASP.NET Core MVC web application developed for COMP 2084 – Server-Side Scripting (ASP.NET).
+The application allows secret belorussian users to manage secret agents and their gadgets through a clean and user-friendly interface :)
+---
 
-## Features:
+## Features
+- View detailed information about each agent and gadget
 - Full CRUD operations for:
   - Agents
   - Gadgets
 - Authentication:
   - Local user registration and login
-  - Google login
-  - GitHub login
+  - Google OAuth login
+  - GitHub OAuth login
 - Authorization:
   - Only authenticated users can create, edit, or delete data
-  - Anonymous users can view data but cannot modify it
-- Responsive UI with custom styling
+  - Anonymous users can only view data
+- Image upload support for gadgets
+---
 
-## Authentication:
+## Technologies Used
+- ASP.NET Core MVC
+- C#
+- Microsoft SQL Server
+- Bootstrap
+- OAuth (Google & GitHub)
+---
 
-This application uses ASP.NET Identity for authentication:
-- Users can register and log in using email/password
-- Also using registration is supported via:
-  - Google OAuth
-  - GitHub OAuth
+## Authentication
+This application uses ASP.NET Core Identity for authentication.
 
-## Used Technologies:
-- ASP.NET core MVC;
-- C#;
-- SQL (using a local database);
-- Bootstrap and regular CSS.
+Users can:
+- Register and log in using email and password
+- Sign in using Google
+- Sign in using GitHub
 
-## Purpose:
-- This project demonstrates the use of ASP.NET Core MVC architecture. The authentification will be added in the next stage of this ptoject. 
+Only authenticated users have access to Create, Edit, and Delete operations.
+---
 
-## Future Improvements
-
-In the next iteration of this project, authentication features will be added to enhance security and user management.
-
-Planned improvements include:
-
-* Implementing **user authentication using ASP.NET Core Identity**
-* Adding **Google authentication** for quick sign-in
-* Adding **GitHub authentication** to allow users to log in with their GitHub accounts
-
-These features will improve the overall functionality of the application and demonstrate integration with external authentication providers.
+## Live Demo
+https://secretagentlab.runasp.net
+---
