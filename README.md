@@ -1,7 +1,7 @@
 # SecretAgentGadgetLab
 
 ## Overview
-SecretAgentGadgetLab is an ASP.NET Core MVC web application developed for COMP 2084 – Server-Side Scripting (ASP.NET).
+- SecretAgentGadgetLab is an ASP.NET Core MVC web application developed for COMP 2084 – Server-Side Scripting (ASP.NET).
 The application allows secret belorussian users to manage secret agents and their gadgets through a clean and user-friendly interface :)
 ---
 
@@ -18,7 +18,6 @@ The application allows secret belorussian users to manage secret agents and thei
   - Only authenticated users can create, edit, or delete data
   - Anonymous users can only view data
 - Image upload support for gadgets
----
 
 ## Technologies Used
 - ASP.NET Core MVC
@@ -26,7 +25,6 @@ The application allows secret belorussian users to manage secret agents and thei
 - Microsoft SQL Server
 - Bootstrap
 - OAuth (Google & GitHub)
----
 
 ## Authentication
 This application uses ASP.NET Core Identity for authentication.
@@ -35,10 +33,7 @@ Users can:
 - Register and log in using email and password
 - Sign in using Google
 - Sign in using GitHub
-
-Only authenticated users have access to Create, Edit, and Delete operations.
----
+- Only authenticated users have access to Create, Edit, and Delete operations.
 
 ## Live Demo
 https://secretagentlab.runasp.net
----
