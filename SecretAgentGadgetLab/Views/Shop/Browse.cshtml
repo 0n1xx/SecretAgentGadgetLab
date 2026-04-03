@@ -3,47 +3,64 @@
     ViewData["Title"] = "Gadgets";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h1>Gadgets</h1>
-<section class="row">
-    @foreach (var item in Model)
+
+<div class="browse-main-container">
+
+    <p class="browse-header-label">▶ EQUIPMENT CATALOG</p>
+    <h1 class="browse-header-title">Gadgets</h1>
+
+    @if (!Model.Any())
     {
-        <div class="col-md-4 mb-4">
-            <div class="card shadow-sm h-100">
-                <div class="card-body text-center">
-                    <h5 class="card-title">
-                        <a asp-controller="Gadgets"
-                               asp-action="Details"
-                               asp-route-id="@item.Id"
-                               asp-route-agentId="@item.AgentId"
-                               class="clickable-title">
-                            @item.Name
-                        </a>
-                    </h5>
-                    @if (item.Photo != null)
-                    {
-                        <img src="~/img/product-uploads/@item.Photo"
-                             alt="@item.Name"
-                             class="img-fluid mb-3"
-                             style="width: 100%; height: 300px; object-fit: cover;" />
-                    }
-                    <p class="card-text">
-                        @item.Description
-                    </p>
-                    <p>
-                        <strong>@String.Format("{0:c}",item.Price)</strong>
-                    </p>
-                    <form method="post" action="/Shop/AddToCart">
-                        <div class="form-group mt-4 d-flex flex-column align-items-center">
-                            <label class="control-label" for="Quantity">Quantity:</label>
-                            <input class="form-control form-control-sm w-25 text-center quantity-input"
-                                   name="Quantity" id="Quantity" required
-                                   min="1" max="99999" value="1" type="number" />
-                            <input name="GadgetId" id="GadgetId" type="hidden" value="@item.Id" />
-                            <button class="btn btn-primary mt-1">Add to Cart</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+        <div class="browse-empty">
+            <span style="font-size: 3rem;">🔧</span>
+            <p class="mt-3">No gadgets available from this agent.</p>
+            <a asp-controller="Shop" asp-action="Index" class="btn btn-outline-lime mt-2">← Back to Agents</a>
         </div>
     }
-</section>
+    else
+    {
+        <section class="browse-grid">
+            @foreach (var item in Model)
+            {
+                <div class="browse-card">
+                    @if (item.Photo != null)
+                    {
+                        <div class="browse-card-img-wrap">
+                            <img src="~/img/product-uploads/@item.Photo"
+                                 alt="@item.Name"
+                                 class="browse-card-img" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="browse-card-img-placeholder">🔧</div>
+                    }
+                    <div class="browse-card-body">
+                        <h5 class="browse-card-name">
+                            <a asp-controller="Gadgets"
+                                   asp-action="Details"
+                                   asp-route-id="@item.Id"
+                                   asp-route-agentId="@item.AgentId"
+                                   class="clickable-title">
+                                @item.Name
+                            </a>
+                        </h5>
+                        <p class="browse-card-desc">@item.Description</p>
+                        <p class="browse-card-price">@String.Format("{0:c}", item.Price)</p>
+                        <form method="post" action="/Shop/AddToCart">
+                            <div class="browse-card-form">
+                                <label class="browse-qty-label">QTY</label>
+                                <input class="form-control form-control-sm text-center quantity-input browse-qty-input"
+                                       name="Quantity" id="Quantity" required
+                                       min="1" max="99999" value="1" type="number" />
+                                <input name="GadgetId" id="GadgetId" type="hidden" value="@item.Id" />
+                                <button class="btn btn-primary browse-add-btn">Add to Cart</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            }
+        </section>
+    }
+
+</div>
