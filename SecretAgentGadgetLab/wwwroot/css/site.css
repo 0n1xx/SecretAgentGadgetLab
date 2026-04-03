@@ -378,6 +378,7 @@ footer {
 }
 
 /* Red-tinted remove link styled as a subtle button */
+/* Remove button (works for button now, not link) */
 .cart-delete-btn {
     color: #ff4444 !important;
     font-size: 0.8rem;
@@ -385,12 +386,20 @@ footer {
     padding: 3px 10px;
     border-radius: 4px;
     transition: 0.2s;
+    background: transparent;
+    cursor: pointer;
 }
 
-    .cart-delete-btn:hover {
-        background: #ff4444;
-        color: #fff !important;
-    }
+.cart-delete-btn:focus,
+.cart-delete-btn:active {
+   outline: none;
+   box-shadow: none;
+}
+
+.cart-delete-btn:hover {
+    background: #ff4444;
+    color: #fff !important;
+}
 
 /* Bottom row with total price box and continue shopping button */
 .cart-footer {
@@ -400,6 +409,12 @@ footer {
     margin-top: 1.5rem;
     flex-wrap: wrap;
     gap: 1rem;
+}
+
+.cart-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
 }
 
 .cart-total-box {

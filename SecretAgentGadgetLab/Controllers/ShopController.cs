@@ -86,5 +86,23 @@ namespace SecretAgentGadgetLab.Controllers
 
             return View(cartItems);
         }
+
+        // POST: /Shop/RemoveFromCart/12
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult RemoveFromCart(int id)
+        {
+            var cartItem = _context.Carts.FirstOrDefault(c => c.Id == id);
+
+            if (cartItem == null)
+            {
+                return NotFound();
+            }
+
+            _context.Carts.Remove(cartItem);
+            _context.SaveChanges();
+
+            return RedirectToAction(nameof(Cart));
+        }
     }
 }
