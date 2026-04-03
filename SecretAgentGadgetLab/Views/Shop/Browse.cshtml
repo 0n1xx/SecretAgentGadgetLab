@@ -14,7 +14,7 @@
                         <a asp-controller="Gadgets"
                                asp-action="Details"
                                asp-route-id="@item.Id"
-                               style="text-decoration: none; color: inherit;">
+                               class="clickable-title">
                             @item.Name
                         </a>
                     </h5>
@@ -23,14 +23,24 @@
                         <img src="~/img/product-uploads/@item.Photo"
                              alt="@item.Name"
                              class="img-fluid mb-3"
-                             style="width: 100%; height: 200px; object-fit: cover;" />
+                             style="width: 100%; height: 300px; object-fit: cover;" />
                     }
                     <p class="card-text">
                         @item.Description
                     </p>
                     <p>
-                        <strong>$@item.Price</strong>
+                        <strong>@String.Format("{0:c}",item.Price)</strong>
                     </p>
+                    <form method="post" action="/Shop/AddToCart">
+                        <div class="form-group mt-4 d-flex flex-column align-items-center">
+                            <label class="control-label" for="Quantity">Quantity:</label>
+                            <input class="form-control form-control-sm w-25 text-center quantity-input"
+                                   name="Quantity" id="Quantity" required
+                                   min="1" max="99999" value="1" type="number" />
+                            <input name="ProductId" id="ProductId" type="hidden" value="@item.Id" />
+                            <button class="btn btn-primary mt-1">Add to Cart</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

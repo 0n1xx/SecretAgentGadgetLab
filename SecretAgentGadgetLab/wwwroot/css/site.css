@@ -53,6 +53,18 @@ a:hover {
     color: #ccff66;
 }
 
+/* Decorating the titles of the gadgets on the shop page */
+.clickable-title {
+    color: inherit;
+    text-decoration: underline;
+    transition: 0.2s;
+}
+
+.clickable-title:hover {
+    color: #00cc66;
+    cursor: pointer;
+}
+
 /* Implicitly changing the colour of the nav bar to black */
 .navbar {
     background-color: #000 !important;
@@ -141,6 +153,12 @@ input, select, textarea {
     background-color: #000000 !important;
     color: #a3ff12 !important;
     border: 1px solid #1f2937 !important;
+}
+
+.quantity-input {
+    background-color: #1a1a1a !important;
+    color: #a3ff12 !important;
+    border: 1px solid #a3ff12 !important;
 }
 
 input:focus {
