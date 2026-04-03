@@ -299,3 +299,127 @@ footer {
    background: #a3ff12;
    color: #000;
 }
+
+/* CART PAGE */
+.cart-wrapper {
+    margin-top: 1.5rem;
+}
+
+/* Top section with cart icon, label, and title */
+.cart-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.cart-header-icon {
+    font-size: 2.5rem;
+}
+
+.cart-header-label {
+    color: #a3ff12;
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 0;
+}
+
+.cart-header-title {
+    font-size: 2.5rem;
+    margin-bottom: 0;
+}
+
+/* Shown when the cart has no items */
+.cart-empty {
+    border: 1px solid #1f2937;
+    border-radius: 8px;
+    background: #0a0a0a;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+/* Dark styled table */
+.cart-table-wrapper {
+    border: 1px solid #1f2937;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.cart-table thead th {
+    background: #0a0a0a;
+    color: #a3ff12 !important;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    padding: 14px 16px;
+    border-bottom: 1px solid #a3ff12 !important;
+}
+
+.cart-table tbody td {
+    padding: 14px 16px;
+    vertical-align: middle;
+    border-bottom: 1px solid #1f2937 !important;
+    color: #d1d5db !important;
+}
+
+.cart-gadget-name {
+    font-weight: 600;
+    color: #fff !important;
+}
+
+.cart-subtotal {
+    color: #a3ff12 !important;
+    font-weight: 600;
+}
+
+.cart-date {
+    color: #6b7280 !important;
+    font-size: 0.85rem;
+}
+
+/* Red-tinted remove link styled as a subtle button */
+.cart-delete-btn {
+    color: #ff4444 !important;
+    font-size: 0.8rem;
+    border: 1px solid #ff4444;
+    padding: 3px 10px;
+    border-radius: 4px;
+    transition: 0.2s;
+}
+
+    .cart-delete-btn:hover {
+        background: #ff4444;
+        color: #fff !important;
+    }
+
+/* Bottom row with total price box and continue shopping button */
+.cart-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.cart-total-box {
+    border: 1px solid #a3ff12;
+    border-radius: 8px;
+    padding: 16px 28px;
+    background: #0a0a0a;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-total-label {
+    color: #a3ff12;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+}
+
+.cart-total-value {
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 700;
+}

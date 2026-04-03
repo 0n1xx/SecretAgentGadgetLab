@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SecretAgentGadgetLab.Data;
+using SecretAgentGadgetLab.Models;
 
 namespace SecretAgentGadgetLab.Controllers
 {
@@ -28,6 +29,62 @@ namespace SecretAgentGadgetLab.Controllers
                 .ToListAsync();
 
             return View(gadgets);
+        }
+        [HttpPost]
+        public IActionResult AddToCart(int GadgetId, int Quantity)
+        {
+            // Get current gadget price
+            var price = _context.Gadgets.Find(GadgetId).Price;
+
+            // Identify the customer
+            var customerId = User.Identity.Name;
+
+            // Check if gadget already exists in the cart
+            var cartItem = _context.Carts.SingleOrDefault(c => c.GadgetId == GadgetId && c.CustomerId == customerId);
+
+            if (cartItem != null)
+            {
+                // Gadget already in cart, update quantity
+                cartItem.Quantity += Quantity;
+                _context.Update(cartItem);
+                _context.SaveChanges();
+            }
+            else
+            {
+                // Create a new Cart object
+                var cart = new Cart
+                {
+                    GadgetId = GadgetId,
+                    Quantity = Quantity,
+                    Price = (double)price,
+                    CustomerId = customerId,
+                    DateCreated = DateTime.Now
+                };
+                _context.Carts.Add(cart);
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("Cart");
+        }
+        public IActionResult Cart()
+        {
+            // Get the logged-in user's email as their ID
+            var customerId = User.Identity.Name;
+
+            // Get items in the customer's cart with gadget details
+            var cartItems = _context.Carts
+                .Include(c => c.Gadget)
+                .Where(c => c.CustomerId == customerId)
+                .ToList();
+
+            // Count total quantity for display in navbar
+            var itemCount = _context.Carts
+                .Where(c => c.CustomerId == customerId)
+                .Sum(c => c.Quantity);
+
+            ViewBag.ItemCount = itemCount;
+
+            return View(cartItems);
         }
     }
 }
