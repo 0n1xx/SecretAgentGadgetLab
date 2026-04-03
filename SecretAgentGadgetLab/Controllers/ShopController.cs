@@ -104,5 +104,49 @@ namespace SecretAgentGadgetLab.Controllers
 
             return RedirectToAction(nameof(Cart));
         }
+        // Get: /Shop/Checkout
+        public IActionResult Checkout()
+        {
+            return View();
+        }
+        // POST: /Shop/Checkout
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Checkout([Bind("FirstName,LastName,Address,City,Province,PostalCode,Phone")] Order order)
+        {
+            // Auto-fill the fields not in the form
+            order.OrderDate = DateTime.Now;
+            order.CustomerId = User.Identity.Name;
+            order.OrderTotal = _context.Carts
+                .Where(c => c.CustomerId == User.Identity.Name)
+                .Sum(c => c.Quantity * c.Price);
+
+            // Save order to DB
+            _context.Orders.Add(order);
+            _context.SaveChanges();
+
+            // Move cart items into OrderDetails
+            var cartItems = _context.Carts
+                .Where(c => c.CustomerId == User.Identity.Name)
+                .ToList();
+
+            foreach (var item in cartItems)
+            {
+                var detail = new OrderDetail
+                {
+                    OrderId = order.OrderId,
+                    GadgetId = item.GadgetId,
+                    Quantity = item.Quantity,
+                    Price = item.Price
+                };
+                _context.OrderDetails.Add(detail);
+            }
+
+            // Clear the cart
+            _context.Carts.RemoveRange(cartItems);
+            _context.SaveChanges();
+
+            return RedirectToAction("OrderConfirmation", new { id = order.OrderId });
+        }
     }
 }
