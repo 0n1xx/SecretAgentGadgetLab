@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace SecretAgentGadgetLab.Controllers
 {
     /* 
-     * All the features in this controller are only available to users with the "Administrator" role
+     * All the features in this controller are only available to users with the "Administrator" role 
      */
     [Authorize(Roles = "Administrator")]
     public class GadgetsController : Controller
@@ -23,7 +23,6 @@ namespace SecretAgentGadgetLab.Controllers
         {
             _context = context;
         }
-
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Gadgets.Include(g => g.Agent);
@@ -79,7 +78,6 @@ namespace SecretAgentGadgetLab.Controllers
             ViewData["AgentId"] = new SelectList(_context.Agents, "Id", "CodeName", gadget.AgentId);
             return View(gadget);
         }
-
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -143,7 +141,6 @@ namespace SecretAgentGadgetLab.Controllers
             ViewData["AgentId"] = new SelectList(_context.Agents, "Id", "CodeName", gadget.AgentId);
             return View(gadget);
         }
-
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
