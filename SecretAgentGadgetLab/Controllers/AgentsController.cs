@@ -11,9 +11,9 @@ using SecretAgentGadgetLab.Models;
 namespace SecretAgentGadgetLab.Controllers
 {
     /*
-     * In this controller, I implemented the following features:
-     * The view is availbale to authenticated users, and the etiding and deleting operations are only available to users with the "Administrator" role.
+     * All the features in this controller are only available to users with the "Administrator" role
      */
+    [Authorize(Roles = "Administrator")]
     public class AgentsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,14 +22,10 @@ namespace SecretAgentGadgetLab.Controllers
         {
             _context = context;
         }
-
-        [Authorize]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Agents.ToListAsync());
         }
-
-        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -47,8 +43,6 @@ namespace SecretAgentGadgetLab.Controllers
 
             return View(agent);
         }
-
-        [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             return View();
@@ -56,7 +50,6 @@ namespace SecretAgentGadgetLab.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Create([Bind("Id,CodeName,CountryCode,Salary")] Agent agent)
         {
             if (ModelState.IsValid)
@@ -67,8 +60,6 @@ namespace SecretAgentGadgetLab.Controllers
             }
             return View(agent);
         }
-
-        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,7 +77,6 @@ namespace SecretAgentGadgetLab.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,CodeName,CountryCode,Salary")] Agent agent)
         {
             if (id != agent.Id)
@@ -116,8 +106,6 @@ namespace SecretAgentGadgetLab.Controllers
             }
             return View(agent);
         }
-
-        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -138,7 +126,6 @@ namespace SecretAgentGadgetLab.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var agent = await _context.Agents.FindAsync(id);

@@ -1,0 +1,33 @@
+﻿@model IEnumerable<SecretAgentGadgetLab.Models.Agent>
+
+@{
+    ViewData["Title"] = "Shop";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Choose an Agent</h1>
+
+<section class="row">
+    @foreach (var agent in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm text-center h-100">
+                <div class="card-body">
+
+                    <h5 class="card-title">@agent.CodeName</h5>
+
+                    <p class="card-text">
+                        <strong>Country:</strong> @agent.CountryCode
+                    </p>
+
+                    <a asp-action="Browse"
+                           asp-route-agentId="@agent.Id"
+                           class="btn btn-primary">
+                        View Gadgets
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    }
+</section>
