@@ -5,50 +5,61 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<div class="container detail-wrapper">
 
-<div>
-    <h4>Gadget</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Photo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Photo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Agent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Agent.CodeName)
-        </dd>
-    </dl>
-</div>
-<div>
-    <!-- Only admins cans see an edit button -->
-    @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
-    {
-        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> 
-        <text> | </text>
-    }
-    <a asp-controller="Shop" asp-action="Browse" asp-route-agentId="@ViewBag.AgentId">Back to List</a>
+    <div class="detail-header">
+        <span class="detail-header-icon">🔍</span>
+        <div>
+            <p class="detail-header-label">Classified Gadget File</p>
+            <h1 class="detail-header-title">@Model.Name</h1>
+        </div>
+    </div>
+
+    <div class="row g-4">
+
+        <div class="col-md-5">
+            <div class="detail-photo-panel">
+                <div class="detail-photo-label">▶ VISUAL IDENTIFICATION</div>
+                @if (Model.Photo != null)
+                {
+                    <img src="~/img/product-uploads/@Model.Photo"
+                         alt="@Model.Name"
+                         class="detail-photo-img" />
+                }
+                else
+                {
+                    <div class="detail-photo-placeholder">🚫</div>
+                }
+            </div>
+        </div>
+
+        <div class="col-md-7 detail-info-col">
+
+            <div class="detail-card">
+                <p class="detail-card-label">▶ MISSION BRIEF</p>
+                <p class="detail-card-text">@Model.Description</p>
+            </div>
+
+            <div class="detail-card detail-card-accent">
+                <p class="detail-card-label">▶ ACQUISITION COST</p>
+                <p class="detail-card-price">@String.Format("{0:c}", Model.Price)</p>
+            </div>
+
+            <div class="detail-card">
+                <p class="detail-card-label">▶ ASSIGNED AGENT</p>
+                <p class="detail-card-text">🕵️ @Model.Agent?.CodeName</p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="detail-actions">
+        @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+        {
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">✏️ Edit</a>
+        }
+        <a asp-controller="Shop" asp-action="Browse" asp-route-agentId="@ViewBag.AgentId"
+           class="btn btn-outline-lime">← Back to List</a>
+    </div>
+
 </div>
