@@ -1,12 +1,54 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Secret Agent Management System</h1>
-    <p>
-        Access to the Shop is classified. 🕵️‍♂️<br />
-        If you’re seeing this, you’re not cleared yet.<br />
-        Register (or log in) to prove you’re not just a random civilian… or worse, a double Belorussian agent. 😏
-    </p>
+<style>
+    #loginPartial {
+        display: none;
+    }
+</style>
+
+<div class="home-main-container">
+
+    <div class="home-label">▶ CLASSIFIED SYSTEM</div>
+    <h1 class="home-title">Secret Agent<br />Management System</h1>
+
+    <div class="home-divider"></div>
+
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <p class="home-sub">Identity confirmed. You are cleared for access, agent.</p>
+        <a asp-controller="Shop" asp-action="Index" class="btn btn-primary home-btn">▶ Enter the Shop</a>
+    }
+    else
+    {
+        <p class="home-sub">
+            Access to the Shop is classified. 🕵♂️<br />
+            If you're seeing this, you're not cleared yet.<br />
+            Register (or log in) to prove you're not just a random civilian… or worse, a double Belorussian agent. 😏
+        </p>
+        <div class="home-actions">
+            <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-primary home-btn">▶ Login</a>
+            <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-outline-lime home-btn">Register</a>
+        </div>
+    }
+
+    <div class="home-stats">
+        <div class="home-stat-card">
+            <span class="home-stat-label">▶ STATUS</span>
+            <span class="home-stat-value">ACTIVE</span>
+        </div>
+        <div class="home-stat-card">
+            <span class="home-stat-label">▶ CLEARANCE</span>
+            <span class="home-stat-value">@(SignInManager.IsSignedIn(User) ? "GRANTED" : "DENIED")</span>
+        </div>
+        <div class="home-stat-card">
+            <span class="home-stat-label">▶ LOCATION</span>
+            <span class="home-stat-value">CLASSIFIED</span>
+        </div>
+    </div>
+
 </div>

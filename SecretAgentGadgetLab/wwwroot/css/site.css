@@ -178,6 +178,91 @@ footer {
     width: 75px;
 }
 
+
+/* Designing the HOME PAGE */
+/* HOME PAGE */
+.home-main-container {
+    margin-top: 5rem;
+    text-align: center;
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.home-label {
+    color: #a3ff12;
+    font-size: 0.7rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.home-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+}
+
+.home-divider {
+    width: 60px;
+    height: 2px;
+    background: #a3ff12;
+    margin: 0 auto 1.5rem;
+}
+
+.home-sub {
+    color: #6b7280;
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+.home-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+.home-btn {
+    padding: 10px 28px;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+.home-stats {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+}
+
+.home-stat-card {
+    border: 1px solid #1f2937;
+    border-radius: 8px;
+    background: #0a0a0a;
+    padding: 16px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 140px;
+}
+
+.home-stat-label {
+    color: #a3ff12;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.home-stat-value {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
 /* GADGET DETAILS PAGE */
 .detail-wrapper {
     margin-top: 1.5rem;
@@ -375,6 +460,33 @@ footer {
 .cart-date {
     color: #6b7280 !important;
     font-size: 0.85rem;
+}
+
+/* Customizing the photo */
+.cart-item-photo {
+    width: 60px;
+    padding: 6px !important;
+}
+
+.cart-product-thumb {
+    width: 52px;
+    height: 52px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: block;
+}
+
+.cart-photo-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    font-size: 1.5rem;
+    background: rgba(255,255,255,0.05);
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.1);
 }
 
 /* Red-tinted remove link styled as a subtle button */

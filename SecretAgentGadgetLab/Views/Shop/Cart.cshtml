@@ -13,7 +13,7 @@
             <h1 class="cart-header-title">Your Cart</h1>
         </div>
     </div>
-
+    <!-- If a card is empty, it displays that the card is empty to a secret agent :) -->
     @if (!Model.Any())
     {
         <div class="cart-empty">
@@ -24,11 +24,13 @@
     }
     else
     {
+    <!-- If it is not empty, it shows all the added gadgets -->
         <div class="cart-table-wrapper">
             <table class="table cart-table">
                 <thead>
                     <tr>
-                        <th>▶ GADGET</th>
+                        <th></th>
+                        <th>GADGET</th>
                         <th>QTY</th>
                         <th>UNIT PRICE</th>
                         <th>SUBTOTAL</th>
@@ -40,6 +42,16 @@
                     @foreach (var item in Model)
                     {
                         <tr>
+                            <td class="cart-item-photo">
+                                @if (item.Gadget?.Photo != null)
+                                {
+                                    <img src="~/img/product-uploads/@item.Gadget.Photo" alt="@item.Gadget.Name" class="cart-product-thumb" />
+                                }
+                                else
+                                {
+                                    <span class="cart-photo-placeholder">🔧</span>
+                                }
+                            </td>
                             <td class="cart-gadget-name">@item.Gadget?.Name</td>
                             <td>@item.Quantity</td>
                             <td>@String.Format("{0:c}", item.Price)</td>
