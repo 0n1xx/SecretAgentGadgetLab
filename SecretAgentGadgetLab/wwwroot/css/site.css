@@ -80,9 +80,44 @@ a:hover {
     color: #9ca3af !important;
 }
 
-    .nav-link:hover {
-        color: #a3ff12 !important;
-    }
+.nav-link:hover {
+    color: #a3ff12 !important;
+}
+
+.navbar .navbar-nav {
+    align-items: center;
+}
+
+.cart-icon-wrap {
+    position: relative;
+    display: inline-block;
+}
+
+.cart-icon {
+    font-size: 1.6rem;
+    color: #9ca3af;
+    transition: color 0.2s;
+}
+
+.cart-nav-link:hover .cart-icon {
+    color: #a3ff12;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -6px;
+    right: -10px;
+    background-color: #a3ff12;
+    color: #000;
+    font-size: 0.6rem;
+    font-weight: 700;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    line-height: 18px;
+    border-radius: 999px;
+    text-align: center;
+}
 
 /*  White headings for h1-h3, with h1 being large and bold */
 h1, h2, h3 {
@@ -141,9 +176,9 @@ table {
     transition: 0.2s;
 }
 
-    .table tbody tr:hover {
-        background-color: #020617;
-    }
+.table tbody tr:hover {
+   background-color: #020617;
+}
 
 .table td {
     border-bottom: 1px solid #1f2937;
@@ -177,7 +212,6 @@ footer {
 .custom-image {
     width: 75px;
 }
-
 
 /* Designing the HOME PAGE */
 /* HOME PAGE */
