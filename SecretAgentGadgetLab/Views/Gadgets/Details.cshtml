@@ -44,6 +44,11 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <!-- Only admins cans see an edit button -->
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+    {
+        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> 
+        <text> | </text>
+    }
+    <a asp-controller="Shop" asp-action="Browse" asp-route-agentId="@ViewBag.AgentId">Back to List</a>
 </div>

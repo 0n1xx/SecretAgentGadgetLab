@@ -14,7 +14,6 @@ namespace SecretAgentGadgetLab.Controllers
     /* 
      * All the features in this controller are only available to users with the "Administrator" role 
      */
-    [Authorize(Roles = "Administrator")]
     public class GadgetsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -23,13 +22,16 @@ namespace SecretAgentGadgetLab.Controllers
         {
             _context = context;
         }
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Gadgets.Include(g => g.Agent);
             return View(await applicationDbContext.OrderBy(g => g.Name).ToListAsync());
         }
-        public async Task<IActionResult> Details(int? id)
+        [Authorize]
+        public async Task<IActionResult> Details(int? id, int? agentId)
         {
+            ViewBag.AgentId = agentId;
             if (id == null)
             {
                 return NotFound();
@@ -46,6 +48,7 @@ namespace SecretAgentGadgetLab.Controllers
 
             return View(gadget);
         }
+        [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             ViewData["AgentId"] = new SelectList(_context.Agents.OrderBy(c => c.CodeName), "Id", "CodeName");
@@ -54,6 +57,7 @@ namespace SecretAgentGadgetLab.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Create([Bind("Id,Name,Description,Price,AgentId")] Gadget gadget, IFormFile Photo)
         {
             if (ModelState.IsValid)
@@ -78,6 +82,7 @@ namespace SecretAgentGadgetLab.Controllers
             ViewData["AgentId"] = new SelectList(_context.Agents, "Id", "CodeName", gadget.AgentId);
             return View(gadget);
         }
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -97,6 +102,7 @@ namespace SecretAgentGadgetLab.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Price,AgentId")] Gadget gadget, IFormFile Photo)
         {
             if (id != gadget.Id)
@@ -141,6 +147,7 @@ namespace SecretAgentGadgetLab.Controllers
             ViewData["AgentId"] = new SelectList(_context.Agents, "Id", "CodeName", gadget.AgentId);
             return View(gadget);
         }
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -162,6 +169,7 @@ namespace SecretAgentGadgetLab.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var gadget = await _context.Gadgets.FindAsync(id);
