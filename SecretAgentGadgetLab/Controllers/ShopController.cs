@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using SecretAgentGadgetLab.Data;
 using SecretAgentGadgetLab.Models;
 using Stripe;
+using Stripe.Checkout;
 
 namespace SecretAgentGadgetLab.Controllers
 {
@@ -167,32 +168,44 @@ namespace SecretAgentGadgetLab.Controllers
 
             return View(order);
         }
-
         [HttpPost]
-        public IActionResult ProcessPayment(string stripeToken, int orderId)
+        [ValidateAntiForgeryToken]
+        public IActionResult ProcessPayment(int orderId)
         {
             StripeConfiguration.ApiKey = _configuration.GetSection("Stripe")["SecretKey"];
 
-            var order = _context.Orders.Find(orderId);
+            var order = _context.Orders
+                .Include(o => o.OrderDetails)
+                .ThenInclude(d => d.Gadget)
+                .FirstOrDefault(o => o.OrderId == orderId);
 
-            var options = new ChargeCreateOptions
+            var lineItems = order.OrderDetails.Select(item => new SessionLineItemOptions
             {
-                Amount = (long)(order.OrderTotal * 100), // в центах
-                Currency = "cad",
-                Description = $"SecretAgent Order #{orderId}",
-                Source = stripeToken
+                PriceData = new SessionLineItemPriceDataOptions
+                {
+                    Currency = "cad",
+                    UnitAmount = (long)(item.Price * 100),
+                    ProductData = new SessionLineItemPriceDataProductDataOptions
+                    {
+                        Name = item.Gadget.Name
+                    }
+                },
+                Quantity = item.Quantity
+            }).ToList();
+
+            var options = new SessionCreateOptions
+            {
+                PaymentMethodTypes = new List<string> { "card" },
+                LineItems = lineItems,
+                Mode = "payment",
+                SuccessUrl = $"{Request.Scheme}://{Request.Host}/Shop/OrderConfirmation?id={orderId}",
+                CancelUrl = $"{Request.Scheme}://{Request.Host}/Shop/Payment/{orderId}"
             };
 
-            var service = new ChargeService();
-            var charge = service.Create(options);
+            var service = new SessionService();
+            var session = service.Create(options);
 
-            if (charge.Status == "succeeded")
-            {
-                return RedirectToAction("OrderConfirmation", new { id = orderId });
-            }
-
-            ViewBag.Error = "Payment failed. Please try again.";
-            return RedirectToAction("Payment", new { id = orderId });
+            return Redirect(session.Url);
         }
     }
 }

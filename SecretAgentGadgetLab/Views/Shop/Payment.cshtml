@@ -3,7 +3,6 @@
     ViewData["Title"] = "Payment";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <div class="container payment-main-container">
     <div class="payment-header">
         <div>
@@ -51,7 +50,8 @@
                 <div class="payment-panel-label">▶ PROCEED TO PAYMENT</div>
                 <div class="payment-panel-body">
                     <p class="payment-info-text">
-                        You will be redirected to our secure payment provider to complete your purchase.
+                        Click below to complete your purchase securely via Stripe.
+                        You will be redirected to Stripe's payment page.
                     </p>
                     <form action="/Shop/ProcessPayment" method="post">
                         @Html.AntiForgeryToken()
