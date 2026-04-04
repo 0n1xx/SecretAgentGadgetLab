@@ -1,0 +1,70 @@
+﻿@model SecretAgentGadgetLab.Models.Order
+@{
+    ViewData["Title"] = "Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container payment-main-container">
+    <div class="payment-header">
+        <div>
+            <p class="payment-header-label">Secure Transaction</p>
+            <h1 class="payment-header-title">Payment</h1>
+        </div>
+    </div>
+    @if (ViewBag.Error != null)
+    {
+        <div class="payment-error">@ViewBag.Error</div>
+    }
+    <div class="row g-4">
+        <div class="col-md-5">
+            <div class="payment-order-panel">
+                <div class="payment-panel-label">▶ ORDER SUMMARY</div>
+                <div class="payment-panel-body">
+                    <table class="table cart-table mb-0">
+                        <thead>
+                            <tr>
+                                <th>GADGET</th>
+                                <th>QTY</th>
+                                <th>PRICE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.OrderDetails)
+                            {
+                                <tr>
+                                    <td class="cart-gadget-name">@item.Gadget?.Name</td>
+                                    <td>@item.Quantity</td>
+                                    <td>@String.Format("{0:c}", item.Price * item.Quantity)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <div class="payment-total-row">
+                        <span class="payment-total-label">▶ TOTAL</span>
+                        <span class="payment-total-value">@String.Format("{0:c}", Model.OrderTotal)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="payment-card-panel">
+                <div class="payment-panel-label">▶ PROCEED TO PAYMENT</div>
+                <div class="payment-panel-body">
+                    <p class="payment-info-text">
+                        You will be redirected to our secure payment provider to complete your purchase.
+                    </p>
+                    <form action="/Shop/ProcessPayment" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="orderId" value="@Model.OrderId" />
+                        <button type="submit" class="btn btn-primary w-100 payment-submit-btn">
+                            Pay @String.Format("{0:c}", Model.OrderTotal)
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="payment-secure-note">
+                Your payment is encrypted and processed securely via Stripe
+            </div>
+        </div>
+    </div>
+</div>

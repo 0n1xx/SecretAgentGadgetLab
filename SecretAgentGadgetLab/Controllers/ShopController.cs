@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SecretAgentGadgetLab.Data;
 using SecretAgentGadgetLab.Models;
+using Stripe;
 
 namespace SecretAgentGadgetLab.Controllers
 {
@@ -11,10 +13,13 @@ namespace SecretAgentGadgetLab.Controllers
     public class ShopController : Controller
     {
         private readonly ApplicationDbContext _context;
+        // Neeed configuration to read Stripe keys from appsettings.json
+        private IConfiguration _configuration;
 
-        public ShopController(ApplicationDbContext context)
+        public ShopController(ApplicationDbContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         public async Task<IActionResult> Index()
@@ -146,7 +151,48 @@ namespace SecretAgentGadgetLab.Controllers
             _context.Carts.RemoveRange(cartItems);
             _context.SaveChanges();
 
-            return RedirectToAction("OrderConfirmation", new { id = order.OrderId });
+            return RedirectToAction("Payment", new { id = order.OrderId });
+        }   
+
+        public IActionResult Payment(int id)
+        {
+            var order = _context.Orders
+                .Include(o => o.OrderDetails)
+                .ThenInclude(d => d.Gadget)
+                .FirstOrDefault(o => o.OrderId == id && o.CustomerId == User.Identity.Name);
+
+            if (order == null) return NotFound();
+
+            ViewBag.PublishableKey = _configuration.GetSection("Stripe")["PublishableKey"];
+
+            return View(order);
+        }
+
+        [HttpPost]
+        public IActionResult ProcessPayment(string stripeToken, int orderId)
+        {
+            StripeConfiguration.ApiKey = _configuration.GetSection("Stripe")["SecretKey"];
+
+            var order = _context.Orders.Find(orderId);
+
+            var options = new ChargeCreateOptions
+            {
+                Amount = (long)(order.OrderTotal * 100), // в центах
+                Currency = "cad",
+                Description = $"SecretAgent Order #{orderId}",
+                Source = stripeToken
+            };
+
+            var service = new ChargeService();
+            var charge = service.Create(options);
+
+            if (charge.Status == "succeeded")
+            {
+                return RedirectToAction("OrderConfirmation", new { id = orderId });
+            }
+
+            ViewBag.Error = "Payment failed. Please try again.";
+            return RedirectToAction("Payment", new { id = orderId });
         }
     }
 }

@@ -668,7 +668,7 @@ footer {
     margin-top: 2rem;
 }
 
-.checkout-submit {
+.payment-submit-submit {
     padding: 10px 28px;
     font-size: 0.9rem;
     letter-spacing: 1px;
@@ -888,4 +888,108 @@ footer {
 .browse-add-btn {
     flex: 1;
     font-size: 0.85rem;
+}
+
+.payment-main-container {
+    margin-top: 1.5rem;
+}
+
+.payment-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.payment-header-label {
+    color: #a3ff12;
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 0;
+}
+
+.payment-header-title {
+    font-size: 2.5rem;
+    margin-bottom: 0;
+}
+
+.payment-error {
+    border: 1px solid #ff4444;
+    border-radius: 8px;
+    background: #1a0000;
+    color: #ff4444;
+    padding: 14px 20px;
+    margin-bottom: 1.5rem;
+}
+
+/* Shows gadget list and order total */
+.payment-order-panel {
+    border: 1px solid #1f2937;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #0a0a0a;
+}
+
+.payment-panel-label {
+    background: #0a0a0a;
+    color: #a3ff12;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    padding: 12px 16px;
+    border-bottom: 1px solid #1f2937;
+}
+
+.payment-panel-body {
+    padding: 16px;
+}
+
+.payment-total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #a3ff12;
+    margin-top: 12px;
+    padding-top: 12px;
+}
+
+.payment-total-label {
+    color: #a3ff12;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+}
+
+.payment-total-value {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* Contains the redirect button to Stripe checkout */
+.payment-card-panel {
+    border: 1px solid #a3ff12;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #0a0a0a;
+}
+
+/* Description above the pay button */
+.payment-info-text {
+    color: #6b7280;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.payment-submit-btn {
+    font-size: 1rem;
+    padding: 12px;
+    letter-spacing: 1px;
+}
+
+/* Small text below the panel */
+.payment-secure-note {
+    color: #4b5563;
+    font-size: 0.8rem;
+    text-align: center;
+    margin-top: 1rem;
 }
