@@ -207,5 +207,18 @@ namespace SecretAgentGadgetLab.Controllers
 
             return Redirect(session.Url);
         }
+
+        // GET: /Shop/OrderConfirmation
+        public IActionResult OrderConfirmation(int id)
+        {
+            var order = _context.Orders
+                .Include(o => o.OrderDetails)
+                .ThenInclude(d => d.Gadget)
+                .FirstOrDefault(o => o.OrderId == id && o.CustomerId == User.Identity.Name);
+
+            if (order == null) return NotFound();
+
+            return View(order);
+        }
     }
 }

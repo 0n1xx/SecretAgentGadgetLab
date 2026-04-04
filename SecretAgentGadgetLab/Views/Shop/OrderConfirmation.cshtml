@@ -1,0 +1,76 @@
+﻿@model SecretAgentGadgetLab.Models.Order
+@{
+    ViewData["Title"] = "Order Confirmation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container confirm-main-container">
+
+    <div class="confirm-header">
+        <div>
+            <p class="confirm-header-label">Mission Complete</p>
+            <h1 class="confirm-header-title">Order Confirmed</h1>
+        </div>
+    </div>
+
+    <div class="confirm-success-banner">
+        ▶ Your payment was successful. Your gadgets are on their way, Agent.
+    </div>
+
+    <div class="row g-4 mt-2">
+
+        <div class="col-md-7">
+            <div class="confirm-panel">
+                <div class="confirm-panel-label">▶ ORDER DETAILS</div>
+                <div class="confirm-panel-body">
+                    <table class="table cart-table mb-0">
+                        <thead>
+                            <tr>
+                                <th>GADGET</th>
+                                <th>QTY</th>
+                                <th>PRICE</th>
+                                <th>SUBTOTAL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.OrderDetails)
+                            {
+                                <tr>
+                                    <td class="cart-gadget-name">@item.Gadget?.Name</td>
+                                    <td>@item.Quantity</td>
+                                    <td>@String.Format("{0:c}", item.Price)</td>
+                                    <td class="cart-subtotal">@String.Format("{0:c}", item.Price * item.Quantity)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <div class="payment-total-row">
+                        <span class="payment-total-label">▶ TOTAL PAID</span>
+                        <span class="payment-total-value">@String.Format("{0:c}", Model.OrderTotal)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5">
+            <div class="confirm-panel">
+                <div class="confirm-panel-label">▶ DELIVERY COORDINATES</div>
+                <div class="confirm-panel-body">
+                    <p class="confirm-info-row"><span class="confirm-info-label">Agent</span> @Model.FirstName @Model.LastName</p>
+                    <p class="confirm-info-row"><span class="confirm-info-label">Phone</span> @Model.Phone</p>
+                    <p class="confirm-info-row"><span class="confirm-info-label">Address</span> @Model.Address</p>
+                    <p class="confirm-info-row"><span class="confirm-info-label">City</span> @Model.City, @Model.Province</p>
+                    <p class="confirm-info-row"><span class="confirm-info-label">Postal</span> @Model.PostalCode</p>
+                    <p class="confirm-info-row"><span class="confirm-info-label">Order Date</span> @Model.OrderDate.ToString("MMM dd, yyyy")</p>
+                    <p class="confirm-info-row"><span class="confirm-info-label">Order #</span> @Model.OrderId</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="confirm-actions">
+        <a asp-controller="Shop" asp-action="Index" class="btn btn-primary">Browse More Gadgets</a>
+    </div>
+
+</div>
