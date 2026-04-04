@@ -3,6 +3,7 @@
     "builder": "NIXPACKS"
   },
   "deploy": {
-    "startCommand": "cd SecretAgentGadgetLab && dotnet run --urls http://0.0.0.0:$PORT"
+    "startCommand": "cd SecretAgentGadgetLab && dotnet publish -c Release -o out && dotnet out/SecretAgentGadgetLab.dll --urls http://0.0.0.0:$PORT"
+
   }
 }
