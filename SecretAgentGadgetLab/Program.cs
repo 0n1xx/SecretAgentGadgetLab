@@ -65,4 +65,10 @@ using (var scope = app.Services.CreateScope())
     db.Database.Migrate();
 }
 app.UseDeveloperExceptionPage();
+// Ensure the database is created and migrated to the latest version. I had the problem connecting to the database using a net manager console and running the command "update-database" to create the database and apply migrations, but it was not working. So I added this code to the Program.cs file to ensure that the database is created and migrated when the application starts.
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    db.Database.Migrate();
+}
 app.Run();

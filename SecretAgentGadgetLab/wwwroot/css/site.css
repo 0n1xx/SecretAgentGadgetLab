@@ -1076,3 +1076,65 @@ footer {
 .confirm-actions {
     margin-top: 2rem;
 }
+
+/* Orders Index Page Design */
+.orders-main-container {
+    margin-top: 1.5rem;
+}
+
+/* Title + optional Create button for admins */
+.orders-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.orders-header-label {
+    color: #a3ff12;
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 0;
+}
+
+.orders-header-title {
+    font-size: 2.5rem;
+    margin-bottom: 0;
+}
+
+/* Designing when there are no order */
+.orders-empty {
+    border: 1px solid #1f2937;
+    border-radius: 8px;
+    background: #0a0a0a;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+/* Orders Index Page Table Design */
+.orders-table-wrapper {
+    border: 1px solid #1f2937;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Details link styled as subtle green button */
+.orders-action-btn {
+    color: #a3ff12 !important;
+    font-size: 0.8rem;
+    border: 1px solid #a3ff12;
+    padding: 3px 10px;
+    border-radius: 4px;
+    transition: 0.2s;
+}
+
+.orders-action-btn:hover {
+    background: #a3ff12;
+    color: #000 !important;
+}
+
+.orders-divider {
+    color: #1f2937;
+    margin: 0 4px;
+}
