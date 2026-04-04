@@ -1,0 +1,8 @@
+{
+  "build": {
+    "builder": "NIXPACKS"
+  },
+  "deploy": {
+    "startCommand": "cd SecretAgentGadgetLab && dotnet run --urls http://0.0.0.0:$PORT"
+  }
+}
