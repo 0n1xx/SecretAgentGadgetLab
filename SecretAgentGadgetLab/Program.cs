@@ -51,6 +51,11 @@ else
 
 app.UseHttpsRedirection();
 app.UseRouting();
+app.Use((context, next) =>
+{
+    context.Request.Scheme = "https";
+    return next();
+});
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapStaticAssets();
