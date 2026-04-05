@@ -1,0 +1,72 @@
+﻿@{
+    ViewData["Title"] = "About";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container about-main-container">
+    <div class="about-hero">
+        <p class="about-hero-label">▶ CLASSIFIED BRIEFING</p>
+        <h1 class="about-hero-title">About SecretAgent Lab</h1>
+        <p class="about-hero-subtitle">
+            The most dangerous gadget marketplace in any known universe.
+        </p>
+    </div>
+    <div class="row g-4 mt-2">
+        <div class="col-md-8">
+            <div class="about-card about-card-accent">
+                <p class="about-card-label">▶ OUR ORIGIN STORY</p>
+                <p class="about-card-text">
+                    In the shadowy aftermath of the Multiverse Collapse of 2019, a group of rogue engineers
+                    and ex-S.H.I.E.L.D. technicians pooled their knowledge to create a single, unified
+                    marketplace for the galaxy's most advanced spy equipment. Operating from an undisclosed
+                    location somewhere between Earth-616 and Earth-1610, SecretAgent Lab was born.
+                </p>
+                <p class="about-card-text">
+                    We don't just sell gadgets. We supply the tools that tip the balance between chaos and order,
+                    between the mission and the mission gone wrong.
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="about-card h-100">
+                <p class="about-card-label">▶ BY THE NUMBERS</p>
+                <div class="about-stat">
+                    <span class="about-stat-number">47</span> <!-- Like Agent 47, I hope that's funny :) -->
+                    <span class="about-stat-desc">Active Secret Agents</span>
+                </div>
+                <div class="about-stat">
+                    <span class="about-stat-number">∞</span>
+                    <span class="about-stat-desc">Parallel Universes Served</span>
+                </div>
+                <div class="about-stat">
+                    <span class="about-stat-number">0</span>
+                    <span class="about-stat-desc">Failed Missions (officially)</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="about-card h-100">
+                <p class="about-card-label">▶ WHAT WE OFFER</p>
+                <p class="about-card-text">From Stark-grade surveillance devices to Wakandan-inspired stealth tech — our agents source only the finest equipment from across the multiverse. Every gadget is field-tested, mission-approved, and aggressively classified.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="about-card h-100">
+                <p class="about-card-label">▶ OUR AGENTS</p>
+                <p class="about-card-text">Each agent in our network is a specialist — trained in covert operations, advanced technology, and the art of looking extremely cool under pressure. They curate their own gadget collections so you know exactly who to trust.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="about-card h-100">
+                <p class="about-card-label">▶ DISCLAIMER</p>
+                <p class="about-card-text">SecretAgent Lab operates in a fictional alternate universe. Any resemblance to actual spy agencies, comic book organizations, or shadowy government programs is entirely intentional and deeply plausible.</p>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="about-cta">
+                <p class="about-cta-label">▶ READY FOR YOUR MISSION?</p>
+                <p class="about-cta-text">Browse our catalog and equip yourself for whatever the multiverse throws at you.</p>
+                <a asp-controller="Shop" asp-action="Index" class="btn btn-primary">View Special Agents</a>
+            </div>
+        </div>
+    </div>
+</div>

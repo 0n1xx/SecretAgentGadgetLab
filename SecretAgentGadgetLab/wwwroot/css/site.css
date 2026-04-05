@@ -1179,3 +1179,106 @@ footer {
     letter-spacing: 2px;
     margin-bottom: 8px;
 }
+
+/* About Page Design */
+.about-main-container {
+    margin-top: 1.5rem;
+}
+
+/* Top section with label, title and subtitle */
+.about-hero {
+    margin-bottom: 1rem;
+}
+
+.about-hero-label {
+    color: #a3ff12;
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.about-hero-title {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.about-hero-subtitle {
+    color: #6b7280;
+    font-size: 1.1rem;
+    margin-bottom: 0;
+}
+
+/* Individual content blocks */
+.about-card {
+    border: 1px solid #1f2937;
+    border-radius: 8px;
+    padding: 24px;
+    background: #0a0a0a;
+}
+
+.about-card-accent {
+    border-color: #a3ff12;
+}
+
+.about-card-label {
+    color: #a3ff12;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.about-card-text {
+    color: #d1d5db;
+    line-height: 1.7;
+}
+
+/*  Number + description pairs in the stats card */
+.about-stat {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #1f2937;
+    padding-bottom: 16px;
+}
+
+.about-stat:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.about-stat-number {
+    color: #a3ff12;
+    font-size: 2rem;
+    font-weight: 700;
+    min-width: 60px;
+}
+
+.about-stat-desc {
+    color: #6b7280;
+    font-size: 0.85rem;
+}
+
+/*  Bottom call to action banner */
+.about-cta {
+    border: 1px solid #1f2937;
+    border-radius: 8px;
+    padding: 32px;
+    background: #0a0a0a;
+    text-align: center;
+}
+
+.about-cta-label {
+    color: #a3ff12;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+}
+
+.about-cta-text {
+    color: #d1d5db;
+    font-size: 1rem;
+    margin-bottom: 20px;
+}

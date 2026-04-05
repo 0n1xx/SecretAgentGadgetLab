@@ -17,7 +17,14 @@ namespace SecretAgentGadgetLab.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        // Loading a Privacy page
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        // Loading an About page
+        public IActionResult About()
         {
             return View();
         }
