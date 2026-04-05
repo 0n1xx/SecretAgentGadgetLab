@@ -1953,7 +1953,7 @@ footer {
     transform: translateY(-1px);
 }
 
-/* ── AGENTS / EDIT PAGE ──────────────────────────────────── */
+/* Agents Edit page */
 .edit-wrapper {
     max-width: 620px;
     margin: 2.5rem auto;
@@ -2005,38 +2005,38 @@ footer {
     margin-bottom: 1.4rem;
 }
 
-    .edit-field label {
-        display: block;
-        color: #6b7280;
-        font-size: 0.75rem;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        margin-bottom: 6px;
-    }
+.edit-field label {
+    display: block;
+    color: #6b7280;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
 
-    .edit-field input,
-    .edit-field select {
-        width: 100%;
-        background: #111 !important;
-        border: 1px solid #1f2937 !important;
-        border-radius: 6px;
-        color: #fff !important;
-        padding: 10px 14px;
-        font-size: 0.95rem;
-        transition: border-color 0.2s, box-shadow 0.2s;
-    }
+.edit-field input,
+.edit-field select {
+    width: 100%;
+    background: #111 !important;
+    border: 1px solid #1f2937 !important;
+    border-radius: 6px;
+    color: #fff !important;
+    padding: 10px 14px;
+    font-size: 0.95rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
 
-        .edit-field select option {
-            background: #111;
-            color: #fff;
-        }
+.edit-field select option {
+    background: #111;
+    color: #fff;
+}
 
-        .edit-field input:focus,
-        .edit-field select:focus {
-            border-color: #a3ff12 !important;
-            box-shadow: 0 0 0 2px rgba(163, 255, 18, 0.15) !important;
-            outline: none;
-        }
+.edit-field input:focus,
+.edit-field select:focus {
+    border-color: #a3ff12 !important;
+    box-shadow: 0 0 0 2px rgba(163, 255, 18, 0.15) !important;
+    outline: none;
+}
 
 .edit-divider {
     border: none;
@@ -2067,7 +2067,7 @@ footer {
         background: #ccff66;
     }
 
-/* ── AGENTS / DELETE PAGE ────────────────────────────────── */
+/* Agents Delete page */
 .delete-wrapper {
     max-width: 580px;
     margin: 2.5rem auto;
@@ -2201,11 +2201,11 @@ footer {
     cursor: pointer;
 }
 
-    .btn-delete:hover {
-        background: #ff6b6b;
-    }
+.btn-delete:hover {
+   background: #ff6b6b;
+}
 
-/* ── FILE INPUT (Gadgets Edit) ───────────────────────────── */
+/* Gadget Edit page design */
 .edit-file-input {
     width: 100%;
     background: #111 !important;
@@ -2218,29 +2218,29 @@ footer {
     transition: border-color 0.2s;
 }
 
-    .edit-file-input:focus {
-        border-color: #a3ff12 !important;
-        outline: none;
-    }
+.edit-file-input:focus {
+    border-color: #a3ff12 !important;
+    outline: none;
+}
 
-    .edit-file-input::file-selector-button {
-        background: #1f2937;
-        color: #a3ff12;
-        border: none;
-        padding: 5px 14px;
-        border-radius: 4px;
-        font-size: 0.8rem;
-        letter-spacing: 1px;
-        cursor: pointer;
-        margin-right: 10px;
-        transition: background 0.2s;
-    }
+.edit-file-input::file-selector-button {
+    background: #1f2937;
+    color: #a3ff12;
+    border: none;
+    padding: 5px 14px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background 0.2s;
+}
 
-        .edit-file-input::file-selector-button:hover {
-            background: #374151;
-        }
+.edit-file-input::file-selector-button:hover {
+    background: #374151;
+}
 
-/* ── GADGET PHOTO (Gadgets Delete) ───────────────────────── */
+/* Gadget Photo Design */
 .delete-gadget-photo-wrap {
     border: 1px solid #1f2937;
     border-radius: 8px;
@@ -2255,7 +2255,7 @@ footer {
     display: block;
 }
 
-/* ── GADGETS INDEX PAGE ──────────────────────────────────── */
+/* Gadget Index Page */
 .gadgets-wrapper {
     margin-top: 1.5rem;
 }
@@ -2384,32 +2384,32 @@ footer {
     color: #a3ff12 !important;
 }
 
-    .gadgets-action-edit:hover {
-        background: #a3ff12;
-        color: #000 !important;
-    }
+.gadgets-action-edit:hover {
+    background: #a3ff12;
+    color: #000 !important;
+}
 
 .gadgets-action-details {
     border-color: #4b5563;
     color: #9ca3af !important;
 }
 
-    .gadgets-action-details:hover {
-        background: #4b5563;
-        color: #fff !important;
-    }
+.gadgets-action-details:hover {
+    background: #4b5563;
+    color: #fff !important;
+}
 
 .gadgets-action-delete {
     border-color: #ff4444;
     color: #ff4444 !important;
 }
 
-    .gadgets-action-delete:hover {
-        background: #ff4444;
-        color: #fff !important;
-    }
+.gadgets-action-delete:hover {
+    background: #ff4444;
+    color: #fff !important;
+}
 
-/* ── AGENTS INDEX PAGE ───────────────────────────────────── */
+/* Agents Index Page */
 .agents-index-wrapper {
     margin-top: 1.5rem;
 }
