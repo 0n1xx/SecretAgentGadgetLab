@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,10 +12,12 @@ namespace SecretAgentGadgetLab.Controllers
     public class GadgetsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly Cloudinary _cloudinary;
 
-        public GadgetsController(ApplicationDbContext context)
+        public GadgetsController(ApplicationDbContext context, Cloudinary cloudinary)
         {
             _context = context;
+            _cloudinary = cloudinary;
         }
 
         [Authorize(Roles = "Administrator")]
@@ -54,16 +58,14 @@ namespace SecretAgentGadgetLab.Controllers
             {
                 if (Photo != null && Photo.Length > 0)
                 {
-                    var extension = Path.GetExtension(Photo.FileName);
-                    var fileName = Guid.NewGuid().ToString() + extension;
-                    var uploadDir = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img", "product-uploads");
-                    Directory.CreateDirectory(uploadDir);
-                    var uploadPath = Path.Combine(uploadDir, fileName);
-
-                    using var stream = new FileStream(uploadPath, FileMode.Create);
-                    await Photo.CopyToAsync(stream);
-
-                    gadget.Photo = fileName;
+                    using var stream = Photo.OpenReadStream();
+                    var uploadParams = new ImageUploadParams
+                    {
+                        File = new FileDescription(Photo.FileName, stream),
+                        Folder = "secret-agent-gadgets"
+                    };
+                    var uploadResult = await _cloudinary.UploadAsync(uploadParams);
+                    gadget.Photo = uploadResult.SecureUrl.ToString();
                 }
 
                 _context.Add(gadget);
@@ -98,16 +100,14 @@ namespace SecretAgentGadgetLab.Controllers
             {
                 if (Photo != null && Photo.Length > 0)
                 {
-                    var extension = Path.GetExtension(Photo.FileName);
-                    var fileName = Guid.NewGuid().ToString() + extension;
-                    var uploadDir = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img", "product-uploads");
-                    Directory.CreateDirectory(uploadDir);
-                    var uploadPath = Path.Combine(uploadDir, fileName);
-
-                    using var stream = new FileStream(uploadPath, FileMode.Create);
-                    await Photo.CopyToAsync(stream);
-
-                    gadget.Photo = fileName;
+                    using var stream = Photo.OpenReadStream();
+                    var uploadParams = new ImageUploadParams
+                    {
+                        File = new FileDescription(Photo.FileName, stream),
+                        Folder = "secret-agent-gadgets"
+                    };
+                    var uploadResult = await _cloudinary.UploadAsync(uploadParams);
+                    gadget.Photo = uploadResult.SecureUrl.ToString();
                 }
 
                 try

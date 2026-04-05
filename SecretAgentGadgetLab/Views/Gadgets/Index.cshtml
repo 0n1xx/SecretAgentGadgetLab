@@ -48,7 +48,7 @@
                 <!-- Creating a simple if statement where I'm verifying if a photo is null or not -->
                 @if (item.Photo != null)
                 {
-                    <img src="~/img/product-uploads/@item.Photo" alt="@item.Photo" class="custom-image"/>
+                    <img src="@item.Photo" alt="@item.Name" class="custom-image" />
                 }
             </td>
             <td>
