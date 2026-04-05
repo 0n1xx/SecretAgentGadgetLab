@@ -33,14 +33,14 @@
                                 <tr>
                                     <td class="cart-gadget-name">@item.Gadget?.Name</td>
                                     <td>@item.Quantity</td>
-                                    <td>@String.Format("{0:c}", item.Price * item.Quantity)</td>
+                                    <td>@String.Format("${0:N2}", item.Price * item.Quantity)</td>
                                 </tr>
                             }
                         </tbody>
                     </table>
                     <div class="payment-total-row">
                         <span class="payment-total-label">▶ TOTAL</span>
-                        <span class="payment-total-value">@String.Format("{0:c}", Model.OrderTotal)</span>
+                        <span class="payment-total-value">@String.Format("${0:N2}", Model.OrderTotal)</span>
                     </div>
                 </div>
             </div>
@@ -57,7 +57,7 @@
                         @Html.AntiForgeryToken()
                         <input type="hidden" name="orderId" value="@Model.OrderId" />
                         <button type="submit" class="btn btn-primary w-100 payment-submit-btn">
-                            Pay @String.Format("{0:c}", Model.OrderTotal)
+                            Pay @String.Format("${0:N2}", Model.OrderTotal)
                         </button>
                     </form>
                 </div>

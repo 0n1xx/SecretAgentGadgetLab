@@ -54,8 +54,8 @@
                             </td>
                             <td class="cart-gadget-name">@item.Gadget?.Name</td>
                             <td>@item.Quantity</td>
-                            <td>@String.Format("{0:c}", item.Price)</td>
-                            <td class="cart-subtotal">@String.Format("{0:c}", item.Price * item.Quantity)</td>
+                            <td>@String.Format("${0:N2}", item.Price)</td>
+                            <td class="cart-subtotal">@String.Format("${0:N2}", item.Price * item.Quantity)</td>
                             <td class="cart-date">@item.DateCreated.ToString("MMM dd, yyyy")</td>
                             <td>
                                 <form asp-action="RemoveFromCart" asp-route-id="@item.Id" method="post" style="display:inline;">
@@ -71,7 +71,7 @@
         <div class="cart-footer">
             <div class="cart-total-box">
                 <span class="cart-total-label">▶ TOTAL COST</span>
-                <span class="cart-total-value">@String.Format("{0:c}", Model.Sum(i => i.Price * i.Quantity))</span>
+                <span class="cart-total-value">@String.Format("${0:N2}", Model.Sum(i => i.Price * i.Quantity))</span>
             </div>
             <div class="cart-actions">
                 <a asp-controller="Shop" asp-action="Index" class="btn btn-outline-lime">← Continue Shopping</a>

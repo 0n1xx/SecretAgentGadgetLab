@@ -44,7 +44,7 @@
                             </a>
                         </h5>
                         <p class="browse-card-desc">@item.Description</p>
-                        <p class="browse-card-price">@String.Format("{0:c}", item.Price)</p>
+                        <p class="browse-card-price">@String.Format("${0:N2}", item.Price)</p>
                         <form method="post" action="/Shop/AddToCart">
                             <div class="browse-card-form">
                                 <label class="browse-qty-label">QTY</label>
