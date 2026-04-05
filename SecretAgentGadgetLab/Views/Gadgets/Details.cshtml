@@ -22,9 +22,7 @@
                 <div class="detail-photo-label">▶ VISUAL IDENTIFICATION</div>
                 @if (Model.Photo != null)
                 {
-                    <img src="~/img/product-uploads/@Model.Photo"
-                         alt="@Model.Name"
-                         class="detail-photo-img" />
+                    <img src="@Model.Photo" alt="@Model.Name" class="detail-photo-img" />
                 }
                 else
                 {
