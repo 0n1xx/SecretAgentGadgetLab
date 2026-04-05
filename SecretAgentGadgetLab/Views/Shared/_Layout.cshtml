@@ -31,6 +31,12 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
+                        <!-- Everyone can see my privacy page -->
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+                        </ul>
                         <!-- Only authenticated users can view the shop in our secret agent marketplace -->
                         @if (User.Identity.IsAuthenticated)
                         {
