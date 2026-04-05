@@ -45,7 +45,7 @@
                             <td class="cart-item-photo">
                                 @if (item.Gadget?.Photo != null)
                                 {
-                                    <img src="~/img/product-uploads/@item.Gadget.Photo" alt="@item.Gadget.Name" class="cart-product-thumb" />
+                                    <img src="@item.Gadget.Photo" alt="@item.Gadget.Name" class="cart-product-thumb" />
                                 }
                                 else
                                 {
