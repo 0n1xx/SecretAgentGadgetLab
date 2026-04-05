@@ -1,55 +1,81 @@
 ﻿@model SecretAgentGadgetLab.Models.Gadget
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Gadget";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
+<div class="edit-wrapper">
 
-<h4>Gadget</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+    <div class="edit-header">
+        <div>
+            <p class="edit-header-label">Admin Panel</p>
+            <h1 class="edit-header-title">Edit Gadget</h1>
+        </div>
+    </div>
+
+    <div class="edit-card">
         <form asp-action="Edit" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
             <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+
+            <div class="edit-field">
+                <p class="edit-section-label">Field / Identity</p>
+                <label asp-for="Name">Gadget Name</label>
+                <input asp-for="Name" placeholder="e.g. Exploding Pen" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
+
+            <hr class="edit-divider" />
+
+            <div class="edit-field">
+                <p class="edit-section-label">Field / Details</p>
+                <label asp-for="Description">Description</label>
+                <input asp-for="Description" placeholder="e.g. Disguised as an ordinary pen..." />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
+
+            <hr class="edit-divider" />
+
+            <div class="edit-field">
+                <p class="edit-section-label">Field / Pricing</p>
+                <label asp-for="Price">Price (USD)</label>
+                <input asp-for="Price" placeholder="e.g. 299.99" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Photo" class="control-label"></label>
-                <input asp-for="Photo" type="file" class="form-control" />
+
+            <hr class="edit-divider" />
+
+            <div class="edit-field">
+                <p class="edit-section-label">Field / Visual</p>
+                <label asp-for="Photo">Photo</label>
+                <input asp-for="Photo" type="file" class="edit-file-input" />
                 <span asp-validation-for="Photo" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="AgentId" class="control-label"></label>
-                <select asp-for="AgentId" class="form-control" asp-items="ViewBag.AgentId"></select>
+
+            <hr class="edit-divider" />
+
+            <div class="edit-field">
+                <p class="edit-section-label">Field / Assignment</p>
+                <label asp-for="AgentId">Assigned Agent</label>
+                <select asp-for="AgentId" asp-items="ViewBag.AgentId">
+                    <option value="">— Select Agent —</option>
+                </select>
                 <span asp-validation-for="AgentId" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+
+            <hr class="edit-divider" />
+
+            <div class="edit-actions">
+                <button type="submit" class="btn-save">Save Changes</button>
+                <a asp-action="Index" class="btn btn-outline-lime">← Back to List</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

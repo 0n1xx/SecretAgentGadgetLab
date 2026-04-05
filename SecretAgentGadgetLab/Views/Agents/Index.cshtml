@@ -5,41 +5,58 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Agents</h1>
+<div class="agents-index-wrapper">
 
-<p>
-    <a asp-action="Create" class="btn btn-primary">Create New</a>
-</p>
-<table class="table table-striped table-hover shadow-sm">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CodeName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CountryCode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Salary)
-            </th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.CodeName</td>
-                <td>@item.CountryCode</td>
-                <td>@item.Salary</td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
-                    <text> | </text>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                    <text> | </text>
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+    <div class="agents-index-header">
+        <div>
+            <p class="agents-index-label">Admin Panel</p>
+            <h1 class="agents-index-title">Agents</h1>
+        </div>
+        <a asp-action="Create" class="btn-save">+ Create New</a>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="agents-index-empty">
+            <p style="font-size:2rem;">🕵️</p>
+            <p style="color:#6b7280;">No agents found. Create one to get started.</p>
+        </div>
+    }
+    else
+    {
+        <div class="agents-index-table-wrap">
+            <table class="table agents-index-table">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.CodeName)</th>
+                        <th>@Html.DisplayNameFor(model => model.CountryCode)</th>
+                        <th>@Html.DisplayNameFor(model => model.Salary)</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="agents-index-td-name">
+                                @item.CodeName
+                            </td>
+                            <td>
+                                <span class="agents-index-badge">@item.CountryCode</span>
+                            </td>
+                            <td class="agents-index-td-salary">$@item.Salary.ToString("N0")</td>
+                            <td>
+                                <div class="gadgets-actions">
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="gadgets-action-btn gadgets-action-details">Details</a>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="gadgets-action-btn gadgets-action-edit">Edit</a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="gadgets-action-btn gadgets-action-delete">Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+
+</div>

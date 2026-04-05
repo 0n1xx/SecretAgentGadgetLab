@@ -1,28 +1,38 @@
 ﻿@model SecretAgentGadgetLab.Models.Agent
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Agent";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
+<div class="edit-wrapper">
 
-<h4>Agent</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+    <div class="edit-header">
+        <div>
+            <p class="edit-header-label">Admin Panel</p>
+            <h1 class="edit-header-title">Edit Agent</h1>
+        </div>
+    </div>
+
+    <div class="edit-card">
         <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
             <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="CodeName" class="control-label"></label>
-                <input asp-for="CodeName" class="form-control" />
+
+            <div class="edit-field">
+                <p class="edit-section-label">Field / Identity</p>
+                <label asp-for="CodeName">Code Name</label>
+                <input asp-for="CodeName" placeholder="e.g. Shadow Fox" />
                 <span asp-validation-for="CodeName" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="CountryCode" class="control-label"></label>
-                <select asp-for="CountryCode" class="form-select">
-                    <option value="">Select Country</option>
+
+            <hr class="edit-divider" />
+
+            <div class="edit-field">
+                <p class="edit-section-label">Field / Origin</p>
+                <label asp-for="CountryCode">Country</label>
+                <select asp-for="CountryCode">
+                    <option value="">— Select Country —</option>
                     <option value="CA">Canada</option>
                     <option value="RU">Russia</option>
                     <option value="BY">Belarus</option>
@@ -30,22 +40,28 @@
                 </select>
                 <span asp-validation-for="CountryCode" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Salary" class="control-label"></label>
-                <input asp-for="Salary" class="form-control" />
+
+            <hr class="edit-divider" />
+
+            <div class="edit-field">
+                <p class="edit-section-label">Field / Compensation</p>
+                <label asp-for="Salary">Salary (USD)</label>
+                <input asp-for="Salary" placeholder="e.g. 75000" />
                 <span asp-validation-for="Salary" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+
+            <hr class="edit-divider" />
+
+            <div class="edit-actions">
+                <button type="submit" class="btn-save">Save Changes</button>
+                <a asp-action="Index" class="btn btn-outline-lime">← Back to List</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

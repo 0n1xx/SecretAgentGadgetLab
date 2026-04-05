@@ -1,37 +1,94 @@
 ﻿@model SecretAgentGadgetLab.Models.Agent
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Agent Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    // Convert 2-letter country code to flag emoji
+    string GetFlag(string code)
+    {
+        if (string.IsNullOrWhiteSpace(code) || code.Length < 2) return "🏳";
+        code = code.Trim().ToUpper();
+        int first = code[0] - 'A' + 0x1F1E6;
+        int second = code[1] - 'A' + 0x1F1E6;
+        return char.ConvertFromUtf32(first) + char.ConvertFromUtf32(second);
+    }
+
+    var flag = GetFlag(Model.CountryCode);
+    var countryUp = Model.CountryCode?.Trim().ToUpper() ?? "??";
+    var salary = Model.Salary.ToString("C0");
 }
 
-<h1>Details</h1>
+<div class="agd-wrapper">
 
-<div>
-    <h4>Agent</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CodeName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CodeName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CountryCode)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CountryCode)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Salary)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Salary)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <!-- Top bar -->
+    <div class="agd-topbar">
+        <span class="agd-topbar-label">&#9658; CLASSIFIED DOSSIER</span>
+        <span class="agd-topbar-id">ID#@Model.Id.ToString("D4")</span>
+    </div>
+
+    <!-- Hero: flag + codename -->
+    <div class="agd-hero">
+        <div class="agd-flag-box">
+            <span class="agd-flag-emoji" id="agdFlag">@flag</span>
+            <span class="agd-flag-code">@countryUp</span>
+        </div>
+
+        <div class="agd-hero-info">
+            <div class="agd-hero-label">&#9658; AGENT CODENAME</div>
+            <h1 class="agd-codename" id="agdCodename">@Model.CodeName</h1>
+            <div class="agd-status-row">
+                <span class="agd-badge agd-badge-active">&#9679; ACTIVE</span>
+                <span class="agd-badge agd-badge-country">@countryUp OPERATIVE</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats grid -->
+    <div class="agd-stats">
+
+        <div class="agd-stat-card">
+            <div class="agd-stat-label">&#9658; COUNTRY CODE</div>
+            <div class="agd-stat-value agd-lime">@countryUp</div>
+            <div class="agd-stat-sub">Origin: @flag @countryUp</div>
+        </div>
+
+        <div class="agd-stat-card agd-stat-card--accent">
+            <div class="agd-stat-label">&#9658; ANNUAL COMPENSATION</div>
+            <div class="agd-stat-value">@salary</div>
+            <div class="agd-stat-sub">Classified budget line</div>
+        </div>
+
+        <div class="agd-stat-card">
+            <div class="agd-stat-label">&#9658; CLEARANCE LEVEL</div>
+            <div class="agd-stat-value agd-lime">OMEGA</div>
+            <div class="agd-stat-sub">Top-tier operative</div>
+        </div>
+
+    </div>
+
+    <!-- Terminal readout -->
+    <div class="agd-terminal">
+        <div class="agd-terminal-bar">
+            <span class="agd-terminal-dot agd-dot-red"></span>
+            <span class="agd-terminal-dot agd-dot-yellow"></span>
+            <span class="agd-terminal-dot agd-dot-green"></span>
+            <span class="agd-terminal-title">agent_profile.sh</span>
+        </div>
+        <div class="agd-terminal-body">
+            <p><span class="agd-t-prompt">$</span> cat /classified/agents/@Model.Id</p>
+            <p><span class="agd-t-key">CODENAME</span>   <span class="agd-t-val">@Model.CodeName</span></p>
+            <p><span class="agd-t-key">COUNTRY</span>    <span class="agd-t-val">@countryUp  @flag</span></p>
+            <p><span class="agd-t-key">SALARY</span>     <span class="agd-t-val">@salary / yr</span></p>
+            <p><span class="agd-t-key">STATUS</span>     <span class="agd-t-val agd-t-active">ACTIVE</span></p>
+            <p><span class="agd-t-prompt">$</span> <span class="agd-cursor">█</span></p>
+        </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="agd-actions">
+        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary agd-btn">&#9658; Edit Dossier</a>
+        <a asp-action="Index" class="btn-outline-lime agd-btn">&#9668; Back to List</a>
+    </div>
+
 </div>

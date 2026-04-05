@@ -1,0 +1,96 @@
+﻿@page
+@model LoginModel
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<div class="login-wrapper">
+    <div class="login-grid">
+
+        <!-- Left: Local Login -->
+        <div class="login-card">
+            <div class="login-section-label">&#9658; Agent Authentication</div>
+            <h1 class="login-section-title">Access Terminal</h1>
+            <p class="login-section-sub">Use your registered credentials.</p>
+            <div class="login-divider"></div>
+
+            <form id="account" method="post">
+                <div asp-validation-summary="ModelOnly" class="login-error-box text-danger" role="alert"></div>
+
+                <div class="login-field">
+                    <label class="login-field-label" asp-for="Input.Email">&#9658; Email</label>
+                    <input asp-for="Input.Email"
+                           autocomplete="username"
+                           aria-required="true"
+                           placeholder="agent@classified.gov" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+
+                <div class="login-field">
+                    <label class="login-field-label" asp-for="Input.Password">&#9658; Password</label>
+                    <input asp-for="Input.Password"
+                           autocomplete="current-password"
+                           aria-required="true"
+                           placeholder="••••••••••••" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+
+                <div class="login-remember">
+                    <input asp-for="Input.RememberMe" />
+                    <label asp-for="Input.RememberMe">Remember this device</label>
+                </div>
+
+                <button id="login-submit" type="submit" class="login-btn-primary">
+                    &#9658; Authenticate
+                </button>
+            </form>
+
+            <div class="login-links">
+                <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+            </div>
+        </div>
+
+        <!-- Right: External Providers -->
+        <div class="login-card">
+            <div class="login-section-label">&#9658; External Access</div>
+            <h2 class="login-section-title">Use another service</h2>
+            <p class="login-section-sub">Authenticate via a trusted provider.</p>
+            <div class="login-divider"></div>
+
+            @{
+                if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                {
+                    <p class="ext-no-providers">
+                        No external authentication services configured.
+                        See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article</a>
+                        about setting up external login providers.
+                    </p>
+                }
+                else
+                {
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        <div class="ext-btn-group">
+                            @foreach (var provider in Model.ExternalLogins!)
+                            {
+                                <button type="submit"
+                                        class="ext-btn"
+                                        name="provider"
+                                        value="@provider.Name"
+                                        title="Log in using your @provider.DisplayName account">
+                                    &#9658; @provider.DisplayName
+                                </button>
+                            }
+                        </div>
+                    </form>
+                }
+            }
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
