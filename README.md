@@ -6,18 +6,23 @@ The application allows secret belorussian users to manage secret agents and thei
 ---
 
 ## Features
-- View detailed information about each agent and gadget
-- Full CRUD operations for:
+- Browse gadgets by secret agent
+- Full shopping cart with quantity management
+- Checkout flow with shipping information
+- Stripe payment integration (test mode)
+- Order history for customers
+- Full CRUD operations for Administrators:
   - Agents
   - Gadgets
+  - Orders
+- Image upload support via Cloudinary
 - Authentication:
   - Local user registration and login
   - Google OAuth login
   - GitHub OAuth login
 - Authorization:
-  - Only authenticated users can create, edit, or delete data
-  - Anonymous users can only view data
-- Image upload support for gadgets
+  - Only authenticated users can access the shop
+  - Only administrators can manage agents, gadgets, and orders
 
 ## Technologies Used
 - ASP.NET Core MVC
@@ -36,4 +41,11 @@ Users can:
 - Only authenticated users have access to Create, Edit, and Delete operations.
 
 ## Live Demo
-https://secretagentlab.runasp.net
+
+[https://secret-agent-lab.up.railway.app](https://secret-agent-lab.up.railway.app)
+
+---
+
+## Author
+
+Vladislav Sakharov | 200625361 | COMP 2084 – Server-Side Scripting (ASP.NET)
