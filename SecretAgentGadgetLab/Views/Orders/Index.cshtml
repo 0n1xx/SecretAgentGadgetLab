@@ -49,7 +49,7 @@
                             {
                                 <td class="cart-date">@item.CustomerId</td>
                             }
-                            <td class="cart-subtotal">@String.Format("{0:c}", item.OrderTotal)</td>
+                            <td class="cart-subtotal">@String.Format("${0:N2}", item.OrderTotal)</td>
                             <td>
                                 <a asp-action="Details" asp-route-id="@item.OrderId" class="orders-action-btn">Details</a>
                                 @if (User.IsInRole("Administrator"))
