@@ -6,7 +6,11 @@ using SecretAgentGadgetLab.Data;
 using SecretAgentGadgetLab.Models;
 using Stripe;
 using Stripe.Checkout;
-
+/*
+ * Handles the full shopping flow: browsing gadgets, managing the cart,
+ * creating orders, and processing payments via Stripe.
+ * Accessible only to authenticated users.
+ */
 namespace SecretAgentGadgetLab.Controllers
 {
     // Only authenticated users can access the shop
@@ -27,7 +31,7 @@ namespace SecretAgentGadgetLab.Controllers
         {
             return View(await _context.Agents.ToListAsync());
         }
-
+        // Display gadgets filtered by selected agent
         public async Task<IActionResult> Browse(int agentId)
         {
             var gadgets = await _context.Gadgets
@@ -36,6 +40,7 @@ namespace SecretAgentGadgetLab.Controllers
 
             return View(gadgets);
         }
+        // Adds item to cart or updates quantity if it already exists
         [HttpPost]
         public IActionResult AddToCart(int GadgetId, int Quantity)
         {
@@ -72,6 +77,7 @@ namespace SecretAgentGadgetLab.Controllers
 
             return RedirectToAction("Cart");
         }
+        // Displays current user's cart with related gadget details
         public IActionResult Cart()
         {
             // Get the logged-in user's email as their ID
@@ -92,8 +98,7 @@ namespace SecretAgentGadgetLab.Controllers
 
             return View(cartItems);
         }
-
-        // POST: /Shop/RemoveFromCart/12
+        // Removes selected item from the cart
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult RemoveFromCart(int id)
@@ -110,12 +115,11 @@ namespace SecretAgentGadgetLab.Controllers
 
             return RedirectToAction(nameof(Cart));
         }
-        // Get: /Shop/Checkout
         public IActionResult Checkout()
         {
             return View();
         }
-        // POST: /Shop/Checkout
+        // Displays checkout form for entering shipping details
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Checkout([Bind("FirstName,LastName,Address,City,Province,PostalCode,Phone")] Order order)
@@ -153,8 +157,8 @@ namespace SecretAgentGadgetLab.Controllers
             _context.SaveChanges();
 
             return RedirectToAction("Payment", new { id = order.OrderId });
-        }   
-
+        }
+        // Loads order and prepares Stripe public key for payment page
         public IActionResult Payment(int id)
         {
             var order = _context.Orders
@@ -168,6 +172,7 @@ namespace SecretAgentGadgetLab.Controllers
 
             return View(order);
         }
+        // Creates Stripe checkout session and redirects user to payment page
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult ProcessPayment(int orderId)
@@ -207,8 +212,7 @@ namespace SecretAgentGadgetLab.Controllers
 
             return Redirect(session.Url);
         }
-
-        // GET: /Shop/OrderConfirmation
+        // Displays confirmation page after successful payment
         public IActionResult OrderConfirmation(int id)
         {
             var order = _context.Orders

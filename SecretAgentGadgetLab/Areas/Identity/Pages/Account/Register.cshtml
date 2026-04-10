@@ -3,20 +3,18 @@
 @{
     ViewData["Title"] = "Register";
 }
-
+<!-- Used Claude (Anthropic) to help generate the base wrapper/container structure (outer wrapper div with header, body, and action divs inside) which was then reused across multiple views in the project
+     (https://claude.ai) -->
 <div class="register-wrapper">
     <div class="register-grid">
-
         <!-- Left: Register Form -->
         <div class="register-card">
             <div class="register-section-label">&#9658; New Agent Enrollment</div>
             <h1 class="register-section-title">Create Account</h1>
             <p class="register-section-sub">Fill in your details to gain clearance.</p>
             <div class="register-divider"></div>
-
             <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
                 <div asp-validation-summary="ModelOnly" class="register-error-box text-danger" role="alert"></div>
-
                 <div class="register-field">
                     <label class="register-field-label" asp-for="Input.Email">&#9658; Email</label>
                     <input asp-for="Input.Email"
@@ -25,7 +23,6 @@
                            placeholder="agent@classified.gov" />
                     <span asp-validation-for="Input.Email" class="text-danger"></span>
                 </div>
-
                 <div class="register-field">
                     <label class="register-field-label" asp-for="Input.Password">&#9658; Password</label>
                     <input asp-for="Input.Password"
@@ -34,7 +31,6 @@
                            placeholder="••••••••••••" />
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
-
                 <div class="register-field">
                     <label class="register-field-label" asp-for="Input.ConfirmPassword">&#9658; Confirm Password</label>
                     <input asp-for="Input.ConfirmPassword"
@@ -43,24 +39,21 @@
                            placeholder="••••••••••••" />
                     <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                 </div>
-
                 <button id="registerSubmit" type="submit" class="register-btn-primary">
                     &#9658; Enroll Agent
                 </button>
             </form>
-
             <div class="register-links">
                 <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Already have an account? Log in</a>
             </div>
         </div>
-
         <!-- Right: External Providers -->
         <div class="register-card">
             <div class="register-section-label">&#9658; External Access</div>
             <h2 class="register-section-title">Use another service</h2>
             <p class="register-section-sub">Register via a trusted provider.</p>
             <div class="register-divider"></div>
-
+            <!-- External register (Google, GitHub). Not actively used now as alternative login/register methods are in place -->
             @{
                 if ((Model.ExternalLogins?.Count ?? 0) == 0)
                 {

@@ -7,17 +7,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SecretAgentGadgetLab.Data;
 using SecretAgentGadgetLab.Models;
-
+/*
+ * This controller manages CRUD operations for agents.
+ * Access is restricted to users with the "Administrator" role only.
+ */
 namespace SecretAgentGadgetLab.Controllers
 {
-    /*
-     * All the features in this controller are only available to users with the "Administrator" role
-     */
     [Authorize(Roles = "Administrator")]
     public class AgentsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
+        // Every time, a controller is created, it needs to be given a reference to the database context.
         public AgentsController(ApplicationDbContext context)
         {
             _context = context;
@@ -93,6 +94,7 @@ namespace SecretAgentGadgetLab.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
+                    // Handle case when record was deleted/modified by another user
                     if (!AgentExists(agent.Id))
                     {
                         return NotFound();
@@ -106,6 +108,8 @@ namespace SecretAgentGadgetLab.Controllers
             }
             return View(agent);
         }
+
+        // Show confirmation page before deleting
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -137,7 +141,7 @@ namespace SecretAgentGadgetLab.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
+        // Helper method to check if agent exists in database
         private bool AgentExists(int id)
         {
             return _context.Agents.Any(e => e.Id == id);

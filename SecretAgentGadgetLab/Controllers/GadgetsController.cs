@@ -6,7 +6,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SecretAgentGadgetLab.Data;
 using SecretAgentGadgetLab.Models;
-
+/*
+ * Controller responsible for managing gadgets in the system.
+ * Users must be authenticated to access this controller,
+ * while create, edit, and delete operations are restricted to administrators only.
+ * Also handles image uploads via Cloudinary.
+ */
 namespace SecretAgentGadgetLab.Controllers
 {
     public class GadgetsController : Controller
@@ -26,7 +31,7 @@ namespace SecretAgentGadgetLab.Controllers
             var applicationDbContext = _context.Gadgets.Include(g => g.Agent);
             return View(await applicationDbContext.OrderBy(g => g.Name).ToListAsync());
         }
-
+        // Available to all authenticated users
         [Authorize]
         public async Task<IActionResult> Details(int? id, int? agentId)
         {
@@ -41,14 +46,14 @@ namespace SecretAgentGadgetLab.Controllers
 
             return View(gadget);
         }
-
+        // Admin-only: show form for creating a gadget. Populating dropdown list of agents
         [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             ViewData["AgentId"] = new SelectList(_context.Agents.OrderBy(c => c.CodeName), "Id", "CodeName");
             return View();
         }
-
+        // Handle gadget creation + optional image upload
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
@@ -56,6 +61,7 @@ namespace SecretAgentGadgetLab.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Upload image to Cloudinary if provided
                 if (Photo != null && Photo.Length > 0)
                 {
                     using var stream = Photo.OpenReadStream();
@@ -72,7 +78,7 @@ namespace SecretAgentGadgetLab.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-
+            // Re-populate dropdown if validation fails
             ViewData["AgentId"] = new SelectList(_context.Agents, "Id", "CodeName", gadget.AgentId);
             return View(gadget);
         }
@@ -88,7 +94,7 @@ namespace SecretAgentGadgetLab.Controllers
             ViewData["AgentId"] = new SelectList(_context.Agents, "Id", "CodeName", gadget.AgentId);
             return View(gadget);
         }
-
+        // Handle edit + optional image replacement
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
@@ -98,6 +104,7 @@ namespace SecretAgentGadgetLab.Controllers
 
             if (ModelState.IsValid)
             {
+                // If new image uploaded → replace old one
                 if (Photo != null && Photo.Length > 0)
                 {
                     using var stream = Photo.OpenReadStream();
@@ -127,7 +134,7 @@ namespace SecretAgentGadgetLab.Controllers
             ViewData["AgentId"] = new SelectList(_context.Agents, "Id", "CodeName", gadget.AgentId);
             return View(gadget);
         }
-
+        // Show delete confirmation page
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {

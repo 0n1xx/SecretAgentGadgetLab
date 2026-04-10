@@ -3,7 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SecretAgentGadgetLab.Data;
 using SecretAgentGadgetLab.Models;
-
+/*
+ * Handles order management and viewing.
+ * All users must be authenticated.
+ * Regular users can only view their own orders,
+ * while administrators have full access (view, create, edit, delete).
+ * Also, I want to mention that I delete default comments. For example, comments like : // POST: Orders/Create. 
+ * I did it, so my code would look better and only meaningful comments would be left. 
+ */
 namespace SecretAgentGadgetLab.Controllers
 {
     [Authorize]
@@ -16,7 +23,7 @@ namespace SecretAgentGadgetLab.Controllers
             _context = context;
         }
 
-        // GET: Orders
+        // Admins can see all orders, regular users only see their own
         public async Task<IActionResult> Index()
         {
             if (User.IsInRole("Administrator"))
@@ -34,7 +41,6 @@ namespace SecretAgentGadgetLab.Controllers
             }
         }
 
-        // GET: Orders/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null) return NotFound();
@@ -45,7 +51,7 @@ namespace SecretAgentGadgetLab.Controllers
                 .FirstOrDefaultAsync(m => m.OrderId == id);
 
             if (order == null) return NotFound();
-
+            // Prevent users from accessing other users' orders. Only admins can view all orders.
             if (!User.IsInRole("Administrator"))
             {
                 if (User.Identity.Name != order.CustomerId)
@@ -55,14 +61,12 @@ namespace SecretAgentGadgetLab.Controllers
             return View(order);
         }
 
-        // GET: Orders/Create
         [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Orders/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
@@ -77,19 +81,17 @@ namespace SecretAgentGadgetLab.Controllers
             return View(order);
         }
 
-        // GET: Orders/Edit/5
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null) return NotFound();
-
+            // Load order with related items (OrderDetails + Gadgets)
             var order = await _context.Orders.FindAsync(id);
             if (order == null) return NotFound();
 
             return View(order);
         }
 
-        // POST: Orders/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
@@ -116,7 +118,6 @@ namespace SecretAgentGadgetLab.Controllers
             return View(order);
         }
 
-        // GET: Orders/Delete/5
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -129,7 +130,6 @@ namespace SecretAgentGadgetLab.Controllers
             return View(order);
         }
 
-        // POST: Orders/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]

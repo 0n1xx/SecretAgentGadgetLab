@@ -1,7 +1,10 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using SecretAgentGadgetLab.Models;
-
+/*
+ * Controls basic site pages like Home, About, Privacy, and Error.
+ * No special logic here, just returning views.
+ */
 namespace SecretAgentGadgetLab.Controllers
 {
     public class HomeController : Controller

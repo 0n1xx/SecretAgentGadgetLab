@@ -17,14 +17,14 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 
-// Register Cloudinary
+// Register Cloudinary for storing the photos. So, every time, the project is redeployed, the photos won't be lost. The configuration values are stored in appsettings.json and accessed via the IConfiguration service.
 var cloudinaryAccount = new CloudinaryDotNet.Account(
     builder.Configuration["Cloudinary:CloudName"],
     builder.Configuration["Cloudinary:ApiKey"],
     builder.Configuration["Cloudinary:ApiSecret"]
 );
 builder.Services.AddSingleton(new CloudinaryDotNet.Cloudinary(cloudinaryAccount));
-
+// Adding authentication services for Google and GitHub
 builder.Services.AddAuthentication()
     .AddGoogle(options =>
     {
@@ -51,6 +51,7 @@ else
 
 app.UseHttpsRedirection();
 app.UseRouting();
+// Force HTTPS scheme for all requests. There was a problem with the reverse proxy not forwarding the X-Forwarded-Proto header, so I set the scheme manually here.
 app.Use((context, next) =>
 {
     context.Request.Scheme = "https";

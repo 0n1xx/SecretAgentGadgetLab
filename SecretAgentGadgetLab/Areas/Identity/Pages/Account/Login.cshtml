@@ -3,20 +3,18 @@
 @{
     ViewData["Title"] = "Log in";
 }
-
+<!-- Used Claude (Anthropic) to help generate the base wrapper/container structure (outer wrapper div with header, body, and action divs inside) which was then reused across multiple views in the project
+     (https://claude.ai) -->
 <div class="login-wrapper">
     <div class="login-grid">
-
         <!-- Left: Local Login -->
         <div class="login-card">
             <div class="login-section-label">&#9658; Agent Authentication</div>
             <h1 class="login-section-title">Access Terminal</h1>
             <p class="login-section-sub">Use your registered credentials.</p>
             <div class="login-divider"></div>
-
             <form id="account" method="post">
                 <div asp-validation-summary="ModelOnly" class="login-error-box text-danger" role="alert"></div>
-
                 <div class="login-field">
                     <label class="login-field-label" asp-for="Input.Email">&#9658; Email</label>
                     <input asp-for="Input.Email"
@@ -25,7 +23,6 @@
                            placeholder="agent@classified.gov" />
                     <span asp-validation-for="Input.Email" class="text-danger"></span>
                 </div>
-
                 <div class="login-field">
                     <label class="login-field-label" asp-for="Input.Password">&#9658; Password</label>
                     <input asp-for="Input.Password"
@@ -34,31 +31,27 @@
                            placeholder="••••••••••••" />
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
-
                 <div class="login-remember">
                     <input asp-for="Input.RememberMe" />
                     <label asp-for="Input.RememberMe">Remember this device</label>
                 </div>
-
                 <button id="login-submit" type="submit" class="login-btn-primary">
                     &#9658; Authenticate
                 </button>
             </form>
-
             <div class="login-links">
                 <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
                 <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
                 <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
             </div>
         </div>
-
-        <!-- Right: External Providers -->
+        <!-- Right: External Providers such as Google and Guthub in this case -->
         <div class="login-card">
             <div class="login-section-label">&#9658; External Access</div>
             <h2 class="login-section-title">Use another service</h2>
             <p class="login-section-sub">Authenticate via a trusted provider.</p>
             <div class="login-divider"></div>
-
+            <!-- External login (Google, GitHub). Not actively used now as alternative login/register methods are in place -->
             @{
                 if ((Model.ExternalLogins?.Count ?? 0) == 0)
                 {
