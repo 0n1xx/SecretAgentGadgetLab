@@ -1,4 +1,7 @@
-﻿/* Secret Agent Lab — Mobile-first responsive stylesheet
+﻿/*  Used Claude (Anthropic) to help design and structure parts of the CSS layout (responsive design, sections, and components)
+(https://claude.ai) */
+
+/* Secret Agent Lab — Mobile-first responsive stylesheet
    Base styles preserved, mobile overrides via media queries */
 
 html {
@@ -35,7 +38,7 @@ body {
     font-family: 'Segoe UI', sans-serif;
 }
 
-/* Form floating placeholders */
+/* Form floating placeholders behavior */
 .form-floating > .form-control-plaintext::placeholder,
 .form-floating > .form-control::placeholder {
     color: var(--bs-secondary-color);
@@ -137,7 +140,7 @@ a {
     text-align: center;
 }
 
-/* Navbar burger and dropdown for mobile and tablets */
+/* Navbar toggler (hamburger menu) */
 .navbar-toggler {
     border: 1px solid #a3ff12 !important;
     padding: 6px 10px;
@@ -153,7 +156,7 @@ a {
     outline: none;
 }
 
-/* Collapsed navbar menu on mobile and tablets */
+/* Collapsed navbar menu on mobile and tablets (<= 991px) */
 @media (max-width: 991px) {
     .navbar-collapse {
         background-color: #000 !important;
@@ -330,12 +333,12 @@ table {
     }
 }
 
-/* Inputs */
+/* Form inputs */
 input, select, textarea {
     background-color: #000000 !important;
     color: #a3ff12 !important;
     border: 1px solid #1f2937 !important;
-    font-size: 1rem;
+    font-size: 1rem; /* Prevents iOS zoom on focus */
 }
 
 .quantity-input {
@@ -395,7 +398,7 @@ footer.footer,
     letter-spacing: 0.5px;
 }
 
-/* Footer center section */
+/* Footer center - status indicator */
 .footer-center {
     display: flex;
     align-items: center;
@@ -483,6 +486,123 @@ footer.footer,
         margin-top: 5rem;
     }
 }
+
+/* Gadget details page */
+.detail-wrapper {
+    margin-top: 1.5rem;
+    padding: 0 0.5rem;
+}
+
+/* Cart page */
+.cart-wrapper {
+    margin-top: 1.5rem;
+    padding: 0 0.5rem;
+}
+
+/* Checkout page */
+.checkout-main-container {
+    max-width: 700px;
+    margin: 1rem auto;
+    padding: 0 1rem;
+}
+
+@media (min-width: 768px) {
+    .checkout-main-container {
+        margin: 2rem auto;
+    }
+}
+
+/* Agents shop page */
+.agents-main-container {
+    margin-top: 1.5rem;
+    padding: 0 0.5rem;
+}
+
+/* Browse page */
+.browse-main-container {
+    margin-top: 1.5rem;
+    padding: 0 0.5rem;
+}
+
+/* Payment page */
+.payment-main-container {
+    margin-top: 1.5rem;
+    padding: 0 0.5rem;
+}
+
+/* Order confirmed page */
+.confirm-wrapper {
+    margin-top: 1.5rem;
+    padding: 0 0.5rem;
+}
+
+/* Orders index page */
+.orders-main-container {
+    margin-top: 1.5rem;
+    padding: 0 0.5rem;
+}
+
+/* Login and Register pages */
+.login-wrapper,
+.register-wrapper {
+    min-height: 75vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 1.5rem 1rem;
+}
+
+@media (min-width: 576px) {
+    .login-wrapper,
+    .register-wrapper {
+        align-items: center;
+        padding: 2.5rem 1rem;
+    }
+}
+
+/* Agent details page */
+.agd-wrapper {
+    max-width: 820px;
+    margin: 1.5rem auto;
+    padding: 0 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+@media (min-width: 768px) {
+    .agd-wrapper {
+        margin: 2rem auto;
+        padding: 0;
+    }
+}
+
+/* Edit and Delete pages */
+.edit-wrapper,
+.delete-wrapper {
+    max-width: 620px;
+    margin: 1.5rem auto;
+    padding: 0 0.75rem;
+}
+
+@media (min-width: 768px) {
+    .edit-wrapper,
+    .delete-wrapper {
+        margin: 2.5rem auto;
+        padding: 0;
+    }
+}
+
+/* Gadgets and Agents admin index pages */
+.gadgets-wrapper,
+.agents-index-wrapper {
+    margin-top: 1.5rem;
+    padding: 0 0.5rem;
+}
+
+/* ─────────────────────────────────────────────── */
+/* Все остальные стили (оставлены без изменений)   */
+/* ─────────────────────────────────────────────── */
 
 .home-label {
     color: #a3ff12;
@@ -590,12 +710,7 @@ footer.footer,
     font-weight: 700;
 }
 
-/* Gadget details page */
-.detail-wrapper {
-    margin-top: 1.5rem;
-    padding: 0 0.5rem;
-}
-
+/* Gadget details page - continued */
 .detail-header {
     display: flex;
     align-items: center;
@@ -757,12 +872,7 @@ footer.footer,
         color: #000;
     }
 
-/* Cart page */
-.cart-wrapper {
-    margin-top: 1.5rem;
-    padding: 0 0.5rem;
-}
-
+/* Cart page - continued */
 .cart-header {
     display: flex;
     align-items: center;
@@ -1003,19 +1113,7 @@ footer.footer,
     }
 }
 
-/* Checkout page */
-.checkout-main-container {
-    max-width: 700px;
-    margin: 1rem auto;
-    padding: 0 1rem;
-}
-
-@media (min-width: 768px) {
-    .checkout-main-container {
-        margin: 2rem auto;
-    }
-}
-
+/* Checkout page - continued */
 .checkout-header {
     display: flex;
     align-items: center;
@@ -1135,12 +1233,7 @@ footer.footer,
     }
 }
 
-/* Agents shop page */
-.agents-main-container {
-    margin-top: 1.5rem;
-    padding: 0 0.5rem;
-}
-
+/* Agents shop page - continued */
 .agents-header-label {
     color: #a3ff12;
     font-size: 0.75rem;
@@ -1249,7 +1342,7 @@ footer.footer,
     text-align: center;
 }
 
-/* Browse page */
+/* Browse page - continued */
 .browse-empty {
     border: 1px solid #1f2937;
     border-radius: 8px;
@@ -1262,11 +1355,6 @@ footer.footer,
     .browse-empty {
         padding: 60px 20px;
     }
-}
-
-.browse-main-container {
-    margin-top: 1.5rem;
-    padding: 0 0.5rem;
 }
 
 .browse-header-label {
@@ -1415,12 +1503,7 @@ footer.footer,
     min-width: 80px;
 }
 
-/* Payment page */
-.payment-main-container {
-    margin-top: 1.5rem;
-    padding: 0 0.5rem;
-}
-
+/* Payment page - continued */
 .payment-header {
     display: flex;
     align-items: center;
@@ -1538,12 +1621,7 @@ footer.footer,
     margin-top: 1rem;
 }
 
-/* Order confirmed page */
-.confirm-wrapper {
-    margin-top: 1.5rem;
-    padding: 0 0.5rem;
-}
-
+/* Order confirmed page - continued */
 .confirm-header {
     display: flex;
     align-items: center;
@@ -1639,12 +1717,7 @@ footer.footer,
     margin-top: 2rem;
 }
 
-/* Orders index page */
-.orders-main-container {
-    margin-top: 1.5rem;
-    padding: 0 0.5rem;
-}
-
+/* Orders index page - continued */
 .orders-header {
     display: flex;
     align-items: flex-start;
@@ -1894,22 +1967,7 @@ footer.footer,
     margin-bottom: 20px;
 }
 
-/* Login page */
-.login-wrapper {
-    min-height: 75vh;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 1.5rem 1rem;
-}
-
-@media (min-width: 576px) {
-    .login-wrapper {
-        align-items: center;
-        padding: 2.5rem 1rem;
-    }
-}
-
+/* Login page - continued */
 .login-grid {
     width: 100%;
     max-width: 860px;
@@ -2118,22 +2176,7 @@ footer.footer,
         color: #4b5563;
     }
 
-/* Register page */
-.register-wrapper {
-    min-height: 75vh;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 1.5rem 1rem;
-}
-
-@media (min-width: 576px) {
-    .register-wrapper {
-        align-items: center;
-        padding: 2.5rem 1rem;
-    }
-}
-
+/* Register page - continued */
 .register-grid {
     width: 100%;
     max-width: 860px;
@@ -2279,23 +2322,7 @@ footer.footer,
         padding-left: 1rem;
     }
 
-/* Agent details page */
-.agd-wrapper {
-    max-width: 820px;
-    margin: 1.5rem auto;
-    padding: 0 0.75rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-}
-
-@media (min-width: 768px) {
-    .agd-wrapper {
-        margin: 2rem auto;
-        padding: 0;
-    }
-}
-
+/* Agent details page - continued */
 .agd-topbar {
     display: flex;
     justify-content: space-between;
@@ -2999,7 +3026,7 @@ footer.footer,
             background: #374151;
         }
 
-/* Gadget photo in delete */
+/* Gadget photo in delete confirmation */
 .delete-gadget-photo-wrap {
     border: 1px solid #1f2937;
     border-radius: 8px;
@@ -3353,7 +3380,7 @@ footer.footer,
     font-weight: 700;
 }
 
-/* Unified admin tables */
+/* Unified admin tables styles */
 .gadgets-table-wrap,
 .agents-index-table-wrap {
     border: 1px solid #1f2937;
