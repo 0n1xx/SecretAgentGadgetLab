@@ -1,10 +1,6 @@
-﻿/* ═══════════════════════════════════════════════════════════════
-   SECRET AGENT GADGET LAB — site.mobile.css
-   Mobile-first responsive stylesheet
-   Base styles preserved, mobile overrides via @media queries
-═══════════════════════════════════════════════════════════════ */
+﻿/* Secret Agent Lab — Mobile-first responsive stylesheet
+   Base styles preserved, mobile overrides via media queries */
 
-/* ── BASE TYPOGRAPHY ── */
 html {
     font-size: 14px;
     box-sizing: border-box;
@@ -20,13 +16,13 @@ html {
     }
 }
 
-/* ── FOCUS STATES ── */
+/* Focus states */
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus,
 .form-control:focus, .form-check-input:focus {
     box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-/* ── BASE LAYOUT ── */
+/* Base layout */
 html {
     position: relative;
     min-height: 100%;
@@ -37,10 +33,9 @@ body {
     background-color: #050505;
     color: #d1d5db;
     font-family: 'Segoe UI', sans-serif;
-    /* overflow-x: hidden убран — он обрезал таблицы */
 }
 
-/* ── FORM FLOATING ── */
+/* Form floating placeholders */
 .form-floating > .form-control-plaintext::placeholder,
 .form-floating > .form-control::placeholder {
     color: var(--bs-secondary-color);
@@ -52,7 +47,7 @@ body {
     text-align: start;
 }
 
-/* ── LINKS ── */
+/* Links */
 a {
     color: #a3ff12;
     text-decoration: none;
@@ -73,9 +68,7 @@ a {
         cursor: pointer;
     }
 
-/* ══════════════════════════════════════
-   NAVBAR
-══════════════════════════════════════ */
+/* Navbar */
 .navbar {
     background-color: #000 !important;
     border-bottom: 1px solid #1a1a1a;
@@ -144,9 +137,7 @@ a {
     text-align: center;
 }
 
-/* ── NAVBAR BURGER & DROPDOWN (планшеты и мобильные) ── */
-
-/* Иконка бургера — зелёная */
+/* Navbar burger and dropdown for mobile and tablets */
 .navbar-toggler {
     border: 1px solid #a3ff12 !important;
     padding: 6px 10px;
@@ -162,7 +153,7 @@ a {
     outline: none;
 }
 
-/* Выпадающее меню на планшетах ≤ 991px */
+/* Collapsed navbar menu on mobile and tablets */
 @media (max-width: 991px) {
     .navbar-collapse {
         background-color: #000 !important;
@@ -172,7 +163,6 @@ a {
         width: 100%;
     }
 
-    /* Выравниваем nav по вертикали */
     .navbar .navbar-nav {
         align-items: flex-start !important;
         width: 100%;
@@ -199,19 +189,43 @@ a {
         width: 100%;
     }
 
-    /* Убираем горизонтальный align на мобилке */
     .d-sm-inline-flex {
         display: block !important;
     }
 
-    /* Login partial — тоже блочный */
     #loginPartial, form[action*="Logout"] {
         padding: 0.5rem 1rem;
         border-top: 1px solid #1a1a1a;
     }
 }
 
-/* ── HEADINGS ── */
+/* Navbar collapse behavior */
+@media (max-width: 991px) {
+    .navbar-collapse {
+        display: none !important;
+    }
+
+        .navbar-collapse.show,
+        .navbar-collapse.collapsing {
+            display: block !important;
+        }
+
+    .navbar-toggler {
+        display: flex !important;
+    }
+}
+
+@media (min-width: 992px) {
+    .navbar-toggler {
+        display: none !important;
+    }
+
+    .navbar-collapse {
+        display: flex !important;
+    }
+}
+
+/* Headings */
 h1, h2, h3 {
     color: #fff;
 }
@@ -237,7 +251,7 @@ p {
     color: #9ca3af;
 }
 
-/* ── BUTTONS ── */
+/* Buttons */
 .btn-primary {
     background-color: #a3ff12;
     color: #000;
@@ -249,18 +263,17 @@ p {
         background-color: #ccff66;
     }
 
-/* ── TABLES ── */
+/* Tables */
 .table {
     --bs-table-bg: transparent !important;
 }
 
-/* Убираем border с самой таблицы — рамку даёт враппер со скруглением */
 table {
     background-color: #000000;
     border: none;
     width: 100%;
     margin-bottom: 0;
-    border-collapse: collapse; /* убирает внутренние зазоры Bootstrap */
+    border-collapse: collapse;
 }
 
 .table thead {
@@ -290,21 +303,20 @@ table {
     border-bottom: 1px solid #1f2937;
 }
 
-/* Последняя строка — без нижней границы, иначе двойная линия с враппером */
 .table tbody tr:last-child td {
     border-bottom: none;
 }
 
-/* Скругление первой строки thead совпадает со скруглением враппера */
+/* Table wrappers with rounded corners */
 .gadgets-table-wrap,
 .agents-index-table-wrap,
 .orders-table-wrapper,
 .cart-table-wrapper {
     border-radius: 10px;
-    overflow: hidden; /* clip — таблица не вылезает за углы */
+    overflow: hidden;
 }
 
-/* Mobile: make wide tables scroll horizontally */
+/* Horizontal scroll for wide tables on mobile */
 @media (max-width: 767px) {
     .table-responsive-wrap {
         overflow-x: auto;
@@ -318,12 +330,12 @@ table {
     }
 }
 
-/* ── INPUTS ── */
+/* Inputs */
 input, select, textarea {
     background-color: #000000 !important;
     color: #a3ff12 !important;
     border: 1px solid #1f2937 !important;
-    font-size: 1rem; /* Prevents iOS zoom on focus */
+    font-size: 1rem;
 }
 
 .quantity-input {
@@ -337,8 +349,7 @@ input:focus {
     box-shadow: 0 0 8px rgba(163, 255, 18, 0.4);
 }
 
-/* ── FOOTER ── */
-/* — FOOTER — */
+/* Footer */
 footer.footer,
 .footer {
     position: static !important;
@@ -346,8 +357,6 @@ footer.footer,
     border-top: 1px solid #1f2937 !important;
     margin-top: 3rem;
     padding: 0 !important;
-    white-space: normal !important;
-    line-height: normal !important;
 }
 
 .footer-inner {
@@ -359,7 +368,7 @@ footer.footer,
     padding: 1.25rem 0;
 }
 
-/* Left */
+/* Footer left section */
 .footer-left {
     display: flex;
     flex-direction: column;
@@ -386,7 +395,7 @@ footer.footer,
     letter-spacing: 0.5px;
 }
 
-/* Center */
+/* Footer center section */
 .footer-center {
     display: flex;
     align-items: center;
@@ -425,7 +434,7 @@ footer.footer,
     }
 }
 
-/* Right */
+/* Footer right section */
 .footer-right {
     display: flex;
     flex-direction: column;
@@ -454,44 +463,12 @@ footer.footer,
     }
 }
 
-
-/* ══════════════════════════════════════
-   NAVBAR — collapse at md breakpoint
-   (overrides navbar-expand-sm in HTML)
-══════════════════════════════════════ */
-@media (max-width: 991px) {
-    .navbar-collapse {
-        display: none !important;
-    }
-
-        .navbar-collapse.show,
-        .navbar-collapse.collapsing {
-            display: block !important;
-        }
-
-    .navbar-toggler {
-        display: flex !important;
-    }
-}
-
-@media (min-width: 992px) {
-    .navbar-toggler {
-        display: none !important;
-    }
-
-    .navbar-collapse {
-        display: flex !important;
-    }
-}
-
-/* ── UTILITY IMAGE ── */
+/* Utility classes */
 .custom-image {
     width: 75px;
 }
 
-/* ══════════════════════════════════════
-   HOME PAGE
-══════════════════════════════════════ */
+/* Home page */
 .home-main-container {
     margin-top: 2rem;
     text-align: center;
@@ -613,9 +590,7 @@ footer.footer,
     font-weight: 700;
 }
 
-/* ══════════════════════════════════════
-   GADGET DETAILS PAGE
-══════════════════════════════════════ */
+/* Gadget details page */
 .detail-wrapper {
     margin-top: 1.5rem;
     padding: 0 0.5rem;
@@ -782,9 +757,7 @@ footer.footer,
         color: #000;
     }
 
-/* ══════════════════════════════════════
-   CART PAGE
-══════════════════════════════════════ */
+/* Cart page */
 .cart-wrapper {
     margin-top: 1.5rem;
     padding: 0 0.5rem;
@@ -1030,9 +1003,7 @@ footer.footer,
     }
 }
 
-/* ══════════════════════════════════════
-   CHECKOUT PAGE
-══════════════════════════════════════ */
+/* Checkout page */
 .checkout-main-container {
     max-width: 700px;
     margin: 1rem auto;
@@ -1127,7 +1098,7 @@ footer.footer,
     border-radius: 6px;
     color: #fff !important;
     padding: 12px 14px;
-    font-size: 1rem; /* Prevents iOS zoom */
+    font-size: 1rem;
     transition: border-color 0.2s;
 }
 
@@ -1164,9 +1135,7 @@ footer.footer,
     }
 }
 
-/* ══════════════════════════════════════
-   AGENTS SHOP PAGE
-══════════════════════════════════════ */
+/* Agents shop page */
 .agents-main-container {
     margin-top: 1.5rem;
     padding: 0 0.5rem;
@@ -1280,9 +1249,7 @@ footer.footer,
     text-align: center;
 }
 
-/* ══════════════════════════════════════
-   BROWSE PAGE
-══════════════════════════════════════ */
+/* Browse page */
 .browse-empty {
     border: 1px solid #1f2937;
     border-radius: 8px;
@@ -1448,9 +1415,7 @@ footer.footer,
     min-width: 80px;
 }
 
-/* ══════════════════════════════════════
-   PAYMENT PAGE
-══════════════════════════════════════ */
+/* Payment page */
 .payment-main-container {
     margin-top: 1.5rem;
     padding: 0 0.5rem;
@@ -1573,9 +1538,7 @@ footer.footer,
     margin-top: 1rem;
 }
 
-/* ══════════════════════════════════════
-   ORDER CONFIRMED PAGE
-══════════════════════════════════════ */
+/* Order confirmed page */
 .confirm-wrapper {
     margin-top: 1.5rem;
     padding: 0 0.5rem;
@@ -1676,9 +1639,7 @@ footer.footer,
     margin-top: 2rem;
 }
 
-/* ══════════════════════════════════════
-   ORDERS INDEX PAGE
-══════════════════════════════════════ */
+/* Orders index page */
 .orders-main-container {
     margin-top: 1.5rem;
     padding: 0 0.5rem;
@@ -1761,9 +1722,7 @@ footer.footer,
     margin: 0 4px;
 }
 
-/* ══════════════════════════════════════
-   PRIVACY PAGE
-══════════════════════════════════════ */
+/* Privacy page */
 .privacy-label {
     color: #a3ff12;
     font-size: 0.75rem;
@@ -1808,9 +1767,7 @@ footer.footer,
     margin-bottom: 8px;
 }
 
-/* ══════════════════════════════════════
-   ABOUT PAGE
-══════════════════════════════════════ */
+/* About page */
 .about-main-container {
     margin-top: 1.5rem;
     padding: 0 0.5rem;
@@ -1937,9 +1894,7 @@ footer.footer,
     margin-bottom: 20px;
 }
 
-/* ══════════════════════════════════════
-   LOGIN PAGE
-══════════════════════════════════════ */
+/* Login page */
 .login-wrapper {
     min-height: 75vh;
     display: flex;
@@ -2034,7 +1989,7 @@ footer.footer,
     border-radius: 6px;
     color: #a3ff12 !important;
     padding: 12px 14px;
-    font-size: 1rem; /* Prevents iOS zoom */
+    font-size: 1rem;
     outline: none;
     transition: border-color 0.2s, box-shadow 0.2s;
 }
@@ -2163,9 +2118,7 @@ footer.footer,
         color: #4b5563;
     }
 
-/* ══════════════════════════════════════
-   REGISTER PAGE
-══════════════════════════════════════ */
+/* Register page */
 .register-wrapper {
     min-height: 75vh;
     display: flex;
@@ -2260,7 +2213,7 @@ footer.footer,
     border-radius: 6px;
     color: #a3ff12 !important;
     padding: 12px 14px;
-    font-size: 1rem; /* Prevents iOS zoom */
+    font-size: 1rem;
     outline: none;
     transition: border-color 0.2s, box-shadow 0.2s;
 }
@@ -2326,9 +2279,7 @@ footer.footer,
         padding-left: 1rem;
     }
 
-/* ══════════════════════════════════════
-   AGENT DETAILS PAGE
-══════════════════════════════════════ */
+/* Agent details page */
 .agd-wrapper {
     max-width: 820px;
     margin: 1.5rem auto;
@@ -2692,9 +2643,7 @@ footer.footer,
     transform: translateY(-1px);
 }
 
-/* ══════════════════════════════════════
-   AGENTS EDIT PAGE
-══════════════════════════════════════ */
+/* Agents edit page */
 .edit-wrapper {
     max-width: 620px;
     margin: 1.5rem auto;
@@ -2788,7 +2737,7 @@ footer.footer,
         border-radius: 6px;
         color: #fff !important;
         padding: 12px 14px;
-        font-size: 1rem; /* Prevents iOS zoom */
+        font-size: 1rem;
         transition: border-color 0.2s, box-shadow 0.2s;
     }
 
@@ -2841,9 +2790,7 @@ footer.footer,
     background: #ccff66;
 }
 
-/* ══════════════════════════════════════
-   AGENTS DELETE PAGE
-══════════════════════════════════════ */
+/* Agents delete page */
 .delete-wrapper {
     max-width: 580px;
     margin: 1.5rem auto;
@@ -3017,9 +2964,7 @@ footer.footer,
     background: #ff6b6b;
 }
 
-/* ══════════════════════════════════════
-   GADGET EDIT — FILE INPUT
-══════════════════════════════════════ */
+/* Gadget edit file input */
 .edit-file-input {
     width: 100%;
     background: #111 !important;
@@ -3054,7 +2999,7 @@ footer.footer,
             background: #374151;
         }
 
-/* ── GADGET PHOTO ── */
+/* Gadget photo in delete */
 .delete-gadget-photo-wrap {
     border: 1px solid #1f2937;
     border-radius: 8px;
@@ -3075,9 +3020,7 @@ footer.footer,
     }
 }
 
-/* ══════════════════════════════════════
-   GADGETS INDEX PAGE
-══════════════════════════════════════ */
+/* Gadgets index page */
 .gadgets-wrapper {
     margin-top: 1.5rem;
     padding: 0 0.5rem;
@@ -3289,9 +3232,7 @@ footer.footer,
         color: #fff !important;
     }
 
-/* ══════════════════════════════════════
-   AGENTS INDEX PAGE
-══════════════════════════════════════ */
+/* Agents index page */
 .agents-index-wrapper {
     margin-top: 1.5rem;
     padding: 0 0.5rem;
@@ -3411,12 +3352,8 @@ footer.footer,
     color: #a3ff12 !important;
     font-weight: 700;
 }
-/* ══════════════════════
-   UNIFIED ADMIN TABLES
-   (Gadgets + Agents Index — same visual style as Orders)
-══════════════════════ */
 
-/* ── Shared wrapper — горизонтальный скролл ── */
+/* Unified admin tables */
 .gadgets-table-wrap,
 .agents-index-table-wrap {
     border: 1px solid #1f2937;
@@ -3425,7 +3362,6 @@ footer.footer,
     -webkit-overflow-scrolling: touch;
 }
 
-/* ── Shared thead ── */
 .gadgets-table thead th,
 .agents-index-table thead th {
     background: #0a0a0a;
@@ -3438,7 +3374,6 @@ footer.footer,
     white-space: nowrap;
 }
 
-/* ── Shared tbody ── */
 .gadgets-table tbody td,
 .agents-index-table tbody td {
     padding: 14px 16px;
@@ -3446,242 +3381,10 @@ footer.footer,
     border-bottom: 1px solid #1f2937 !important;
     color: #d1d5db !important;
     background: #000;
-    white-space: normal; /* перенос разрешён */
+    white-space: normal;
 }
 
 .gadgets-table tbody tr:hover td,
 .agents-index-table tbody tr:hover td {
     background: #0a0a0a;
-}
-
-/* ══════════════════════════════════════
-   GADGETS INDEX PAGE
-══════════════════════ */
-.gadgets-wrapper {
-    margin-top: 1.5rem;
-    padding: 0 0.5rem;
-}
-
-.gadgets-header {
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
-}
-
-@media (min-width: 576px) {
-    .gadgets-header {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 2rem;
-    }
-}
-
-.gadgets-header-label {
-    color: #a3ff12;
-    font-size: 0.7rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 2px;
-}
-
-.gadgets-header-title {
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: #fff;
-    margin: 0;
-}
-
-@media (min-width: 576px) {
-    .gadgets-header-title {
-        font-size: 2rem;
-    }
-}
-
-.gadgets-empty {
-    border: 1px solid #1f2937;
-    border-radius: 8px;
-    background: #0a0a0a;
-    padding: 40px 16px;
-    text-align: center;
-}
-
-/* photo cell */
-.gadgets-td-photo {
-    width: 66px;
-    padding: 8px 12px !important;
-}
-
-.gadgets-thumb {
-    width: 46px;
-    height: 46px;
-    object-fit: cover;
-    border-radius: 6px;
-    border: 1px solid #1f2937;
-    display: block;
-}
-
-.gadgets-thumb-placeholder {
-    width: 46px;
-    height: 46px;
-    background: #111;
-    border: 1px solid #1f2937;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.3rem;
-}
-
-.gadgets-td-name {
-    font-weight: 600;
-    color: #fff !important;
-}
-
-.gadgets-td-desc {
-    color: #6b7280 !important;
-    font-size: 0.875rem;
-    max-width: 200px;
-}
-
-.gadgets-td-price {
-    color: #a3ff12 !important;
-    font-weight: 700;
-}
-
-/* action buttons — flex wrap → перенос на узком экране */
-.gadgets-actions {
-    display: flex;
-    gap: 0.4rem;
-    flex-wrap: wrap;
-    min-width: 80px;
-}
-
-.gadgets-action-btn {
-    font-size: 0.72rem;
-    padding: 4px 10px;
-    border-radius: 4px;
-    border: 1px solid;
-    letter-spacing: 0.5px;
-    transition: background 0.2s, color 0.2s;
-    text-decoration: none;
-    white-space: nowrap;
-}
-
-.gadgets-action-edit {
-    border-color: #a3ff12;
-    color: #a3ff12 !important;
-}
-
-    .gadgets-action-edit:hover {
-        background: #a3ff12;
-        color: #000 !important;
-    }
-
-.gadgets-action-details {
-    border-color: #4b5563;
-    color: #9ca3af !important;
-}
-
-    .gadgets-action-details:hover {
-        background: #4b5563;
-        color: #fff !important;
-    }
-
-.gadgets-action-delete {
-    border-color: #ff4444;
-    color: #ff4444 !important;
-}
-
-    .gadgets-action-delete:hover {
-        background: #ff4444;
-        color: #fff !important;
-    }
-
-/* ══════════════════════
-   AGENTS INDEX PAGE
-══════════════════════ */
-.agents-index-wrapper {
-    margin-top: 1.5rem;
-    padding: 0 0.5rem;
-}
-
-.agents-index-header {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
-}
-
-@media (min-width: 576px) {
-    .agents-index-header {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 2rem;
-    }
-}
-
-.agents-index-label {
-    color: #a3ff12;
-    font-size: 0.7rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 2px;
-}
-
-.agents-index-title {
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: #fff;
-    margin: 0;
-}
-
-@media (min-width: 576px) {
-    .agents-index-title {
-        font-size: 2rem;
-    }
-}
-
-.agents-index-empty {
-    border: 1px solid #1f2937;
-    border-radius: 8px;
-    background: #0a0a0a;
-    padding: 40px 16px;
-    text-align: center;
-}
-
-.agents-index-td-name {
-    font-weight: 600;
-    color: #fff !important;
-}
-
-.agents-index-avatar {
-    font-size: 1.1rem;
-    line-height: 1;
-}
-
-.agents-index-badge {
-    background: rgba(163, 255, 18, 0.08);
-    color: #a3ff12;
-    font-size: 0.65rem;
-    letter-spacing: 2px;
-    padding: 3px 8px;
-    border-radius: 999px;
-    border: 1px solid #a3ff12;
-    font-weight: 600;
-    white-space: nowrap;
-}
-
-.agents-index-td-salary {
-    color: #a3ff12 !important;
-    font-weight: 700;
-}
-
-/* Actions cell в таблице агентов */
-.agents-index-table .gadgets-actions {
-    flex-wrap: wrap;
-    min-width: 80px;
 }
