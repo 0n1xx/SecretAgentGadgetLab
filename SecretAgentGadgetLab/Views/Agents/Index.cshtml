@@ -4,7 +4,8 @@
     ViewData["Title"] = "Agents";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<!-- Used Claude (Anthropic) to help generate the base wrapper/container structure (outer wrapper div with header, body, and action divs inside) which was then reused across multiple views in the project
+     (https://claude.ai) -->
 <div class="agents-index-wrapper">
 
     <div class="agents-index-header">
@@ -14,11 +15,11 @@
         </div>
         <a asp-action="Create" class="btn-save">+ Create New</a>
     </div>
-
+    <!-- Checking if even have any agents. If not, displaying the following div -->
     @if (!Model.Any())
     {
         <div class="agents-index-empty">
-            <p style="font-size:2rem;">🕵️</p>
+            <p style="font-size:2rem;">🕵️</p> <!-- I hope that this sticker is cool :) -->
             <p style="color:#6b7280;">No agents found. Create one to get started.</p>
         </div>
     }
@@ -27,6 +28,7 @@
         <div class="agents-index-table-wrap">
             <table class="table agents-index-table">
                 <thead>
+                    <!-- Setting the column names for the table -->
                     <tr>
                         <th>@Html.DisplayNameFor(model => model.CodeName)</th>
                         <th>@Html.DisplayNameFor(model => model.CountryCode)</th>
@@ -35,6 +37,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- Displaying every detail about my agents -->
                     @foreach (var item in Model)
                     {
                         <tr>
@@ -58,5 +61,4 @@
             </table>
         </div>
     }
-
 </div>

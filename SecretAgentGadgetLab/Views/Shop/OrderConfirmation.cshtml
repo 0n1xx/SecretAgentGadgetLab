@@ -3,22 +3,19 @@
     ViewData["Title"] = "Order Confirmation";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<!-- Used Claude (Anthropic) to help generate the base wrapper/container structure (outer wrapper div with header, body, and action divs inside) which was then reused across multiple views in the project.
+     (https://claude.ai) -->
 <div class="container confirm-main-container">
-
     <div class="confirm-header">
         <div>
             <p class="confirm-header-label">Mission Complete</p>
             <h1 class="confirm-header-title">Order Confirmed</h1>
         </div>
     </div>
-
     <div class="confirm-success-banner">
         ▶ Your payment was successful. Your gadgets are on their way, Agent.
     </div>
-
     <div class="row g-4 mt-2">
-
         <div class="col-md-7">
             <div class="confirm-panel">
                 <div class="confirm-panel-label">▶ ORDER DETAILS</div>
@@ -51,7 +48,7 @@
                 </div>
             </div>
         </div>
-
+        <!-- Displaying information to confirm to a user that his order will be delivered to a needed address -->
         <div class="col-md-5">
             <div class="confirm-panel">
                 <div class="confirm-panel-label">▶ DELIVERY COORDINATES</div>

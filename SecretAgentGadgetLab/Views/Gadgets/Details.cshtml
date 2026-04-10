@@ -4,9 +4,9 @@
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<!-- Used Claude (Anthropic) to help generate the base wrapper/container structure (outer wrapper div with header, body, and action divs inside) which was then reused across multiple views in the project
+     (https://claude.ai) -->
 <div class="container detail-wrapper">
-
     <div class="detail-header">
         <span class="detail-header-icon">🔍</span>
         <div>
@@ -14,9 +14,7 @@
             <h1 class="detail-header-title">@Model.Name</h1>
         </div>
     </div>
-
     <div class="row g-4">
-
         <div class="col-md-5">
             <div class="detail-photo-panel">
                 <div class="detail-photo-label">▶ VISUAL IDENTIFICATION</div>
@@ -30,19 +28,15 @@
                 }
             </div>
         </div>
-
         <div class="col-md-7 detail-info-col">
-
             <div class="detail-card">
                 <p class="detail-card-label">▶ MISSION BRIEF</p>
                 <p class="detail-card-text">@Model.Description</p>
             </div>
-
             <div class="detail-card detail-card-accent">
                 <p class="detail-card-label">▶ ACQUISITION COST</p>
                 <p class="detail-card-price">@String.Format("${0:N2}", Model.Price)</p>
             </div>
-
             <div class="detail-card">
                 <p class="detail-card-label">▶ ASSIGNED AGENT</p>
                 <p class="detail-card-text">🕵️ @Model.Agent?.CodeName</p>
@@ -50,12 +44,13 @@
 
         </div>
     </div>
-
+    <!-- If a user an admin, they can see an edit button -->
     <div class="detail-actions">
         @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
         {
             <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">✏️ Edit</a>
         }
+        <!-- Everyone has an access to this function -->
         <a asp-controller="Shop" asp-action="Browse" asp-route-agentId="@ViewBag.AgentId"
            class="btn btn-outline-lime">← Back to List</a>
     </div>

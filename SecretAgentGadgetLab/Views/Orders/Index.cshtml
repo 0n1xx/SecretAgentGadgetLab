@@ -3,6 +3,8 @@
     ViewData["Title"] = "Order History";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<!-- Used Claude (Anthropic) to help generate the base wrapper/container structure (outer wrapper div with header, body, and action divs inside) which was then reused across multiple views in the project.
+     (https://claude.ai) -->
 <div class="container orders-main-container">
     <div class="orders-header">
         <div>
@@ -14,6 +16,7 @@
             <a asp-action="Create" class="btn btn-primary ms-auto">+ Create New</a>
         }
     </div>
+    <!-- Displaying a message in case a user doesn't have any orders -->
     @if (!Model.Any())
     {
         <div class="orders-empty">
@@ -30,6 +33,7 @@
                         <th>ORDER #</th>
                         <th>DATE</th>
                         <th>NAME</th>
+                        <!-- Adding a colum for admins to view who exactly ordered the gadgets -->
                         @if (User.IsInRole("Administrator"))
                         {
                             <th>CUSTOMER</th>
@@ -43,6 +47,7 @@
                     {
                         <tr>
                             <td class="cart-gadget-name">#@item.OrderId</td>
+                            <!-- Customizing the date to the needed format -->
                             <td class="cart-date">@item.OrderDate.ToString("MMM dd, yyyy")</td>
                             <td>@item.FirstName @item.LastName</td>
                             @if (User.IsInRole("Administrator"))
@@ -52,6 +57,7 @@
                             <td class="cart-subtotal">@String.Format("${0:N2}", item.OrderTotal)</td>
                             <td>
                                 <a asp-action="Details" asp-route-id="@item.OrderId" class="orders-action-btn">Details</a>
+                                <!-- Only admins can edit and delete orders if it's needed -->
                                 @if (User.IsInRole("Administrator"))
                                 {
                                     <span class="orders-divider">|</span>

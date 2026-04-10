@@ -3,7 +3,8 @@
     ViewData["Title"] = "Checkout";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<!-- Used Claude (Anthropic) to help generate the base wrapper/container structure (outer wrapper div with header, body, and action divs inside) which was then reused across multiple views in the project.
+     (https://claude.ai) -->
 <div class="checkout-main-container">
 
     <div class="checkout-header">
@@ -12,11 +13,10 @@
             <h1 class="checkout-header-title">Checkout</h1>
         </div>
     </div>
-
+    <!-- Created a form with all possible fields that we need to collect from users to delivery them their orders -->
     <div class="checkout-body">
         <form asp-action="Checkout">
             <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
-
             <div class="checkout-section-label">▶ AGENT IDENTITY</div>
             <div class="checkout-row">
                 <div class="checkout-field">
@@ -30,21 +30,17 @@
                     <span asp-validation-for="LastName" class="text-danger"></span>
                 </div>
             </div>
-
             <div class="checkout-field">
                 <label asp-for="Phone" class="checkout-label"></label>
                 <input asp-for="Phone" class="checkout-input" placeholder="416-555-0000" />
                 <span asp-validation-for="Phone" class="text-danger"></span>
             </div>
-
             <div class="checkout-section-label mt-4">▶ DELIVERY COORDINATES</div>
-
             <div class="checkout-field">
                 <label asp-for="Address" class="checkout-label"></label>
                 <input asp-for="Address" class="checkout-input" placeholder="123 Agent St" />
                 <span asp-validation-for="Address" class="text-danger"></span>
             </div>
-
             <div class="checkout-row">
                 <div class="checkout-field">
                     <label asp-for="City" class="checkout-label"></label>
@@ -62,17 +58,13 @@
                     <span asp-validation-for="PostalCode" class="text-danger"></span>
                 </div>
             </div>
-
             <div class="checkout-actions">
                 <a asp-controller="Shop" asp-action="Cart" class="btn btn-outline-lime">← Back to Cart</a>
                 <input type="submit" value="▶ Proceed to payment" class="btn btn-primary payment-submit-submit" />
             </div>
-
         </form>
     </div>
-
 </div>
-
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

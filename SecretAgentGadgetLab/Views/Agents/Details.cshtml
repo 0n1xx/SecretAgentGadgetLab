@@ -13,27 +13,25 @@
         int second = code[1] - 'A' + 0x1F1E6;
         return char.ConvertFromUtf32(first) + char.ConvertFromUtf32(second);
     }
-
+    // Taking the country code and salary from the model and preparing them for display in the view (flag emoji + formatted salary string)
     var flag = GetFlag(Model.CountryCode);
     var countryUp = Model.CountryCode?.Trim().ToUpper() ?? "??";
     var salary = Model.Salary.ToString("C0");
 }
-
+<!-- Used Claude (Anthropic) to help generate the base wrapper/container structure (outer wrapper div with header, body, and action divs inside) which was then reused across multiple views in the project
+     (https://claude.ai) -->
 <div class="agd-wrapper">
-
     <!-- Top bar -->
     <div class="agd-topbar">
         <span class="agd-topbar-label">&#9658; CLASSIFIED DOSSIER</span>
         <span class="agd-topbar-id">ID#@Model.Id.ToString("D4")</span>
     </div>
-
     <!-- Hero: flag + codename -->
     <div class="agd-hero">
         <div class="agd-flag-box">
             <span class="agd-flag-emoji" id="agdFlag">@flag</span>
             <span class="agd-flag-code">@countryUp</span>
         </div>
-
         <div class="agd-hero-info">
             <div class="agd-hero-label">&#9658; AGENT CODENAME</div>
             <h1 class="agd-codename" id="agdCodename">@Model.CodeName</h1>
@@ -43,31 +41,25 @@
             </div>
         </div>
     </div>
-
-    <!-- Stats grid -->
+    <!-- Stats grid for agents stats -->
     <div class="agd-stats">
-
         <div class="agd-stat-card">
             <div class="agd-stat-label">&#9658; COUNTRY CODE</div>
             <div class="agd-stat-value agd-lime">@countryUp</div>
             <div class="agd-stat-sub">Origin: @flag @countryUp</div>
         </div>
-
         <div class="agd-stat-card agd-stat-card--accent">
             <div class="agd-stat-label">&#9658; ANNUAL COMPENSATION</div>
             <div class="agd-stat-value">@salary</div>
             <div class="agd-stat-sub">Classified budget line</div>
         </div>
-
         <div class="agd-stat-card">
             <div class="agd-stat-label">&#9658; CLEARANCE LEVEL</div>
             <div class="agd-stat-value agd-lime">OMEGA</div>
             <div class="agd-stat-sub">Top-tier operative</div>
         </div>
-
     </div>
-
-    <!-- Terminal readout -->
+    <!-- Terminal readout. I Thought that would be cool to implement -->
     <div class="agd-terminal">
         <div class="agd-terminal-bar">
             <span class="agd-terminal-dot agd-dot-red"></span>
@@ -84,11 +76,9 @@
             <p><span class="agd-t-prompt">$</span> <span class="agd-cursor">█</span></p>
         </div>
     </div>
-
-    <!-- Actions -->
+    <!-- Actions to edit and to come back to the index page -->
     <div class="agd-actions">
         <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary agd-btn">&#9658; Edit Dossier</a>
         <a asp-action="Index" class="btn-outline-lime agd-btn">&#9668; Back to List</a>
     </div>
-
 </div>

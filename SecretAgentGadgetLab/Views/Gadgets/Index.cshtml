@@ -4,9 +4,9 @@
     ViewData["Title"] = "Gadgets";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<!-- Used Claude (Anthropic) to help generate the base wrapper/container structure (outer wrapper div with header, body, and action divs inside) which was then reused across multiple views in the project
+     (https://claude.ai) -->
 <div class="gadgets-wrapper">
-
     <div class="gadgets-header">
         <div>
             <p class="gadgets-header-label">Admin Panel</p>
@@ -14,7 +14,7 @@
         </div>
         <a asp-action="Create" class="btn-save">+ Create New</a>
     </div>
-
+    <!-- Displaying the following div if there are no gadgets -->
     @if (!Model.Any())
     {
         <div class="gadgets-empty">
@@ -27,6 +27,7 @@
         <div class="gadgets-table-wrap">
             <table class="table gadgets-table">
                 <thead>
+                    <!-- Setting the column names -->
                     <tr>
                         <th>Photo</th>
                         <th>@Html.DisplayNameFor(model => model.Name)</th>
@@ -37,6 +38,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- Displaying every gadget from my table -->
                     @foreach (var item in Model)
                     {
                         <tr>
@@ -47,7 +49,7 @@
                                 }
                                 else
                                 {
-                                    <div class="gadgets-thumb-placeholder">📦</div>
+                                    <div class="gadgets-thumb-placeholder">📦</div> <!-- I tried using different stickers, I hope they look cool and appropriate here -->
                                 }
                             </td>
                             <td class="gadgets-td-name">@item.Name</td>
@@ -67,5 +69,4 @@
             </table>
         </div>
     }
-
 </div>

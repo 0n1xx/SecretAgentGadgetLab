@@ -2,56 +2,49 @@
     ViewData["Title"] = "Privacy Policy";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<!-- Used Claude (Anthropic) to help generate the base wrapper/container structure (outer wrapper div with header, body, and action divs inside) which was then reused across multiple views in the project. Also, here and on About I used Claud to generate the text for the website.
+     (https://claude.ai) -->
 <div class="container mt-4">
     <p class="privacy-label">▶ Legal</p>
     <h1>Privacy Policy</h1>
     <p class="privacy-date">Last updated: April 4, 2026</p>
     <hr class="privacy-divider" />
-
     <div class="row g-4 mt-2">
-
         <div class="col-md-6">
             <div class="privacy-card">
                 <p class="privacy-card-label">▶ INFORMATION WE COLLECT</p>
                 <p>We collect information you provide directly to us, such as your name, email address, and shipping address when you create an account or place an order.</p>
             </div>
         </div>
-
         <div class="col-md-6">
             <div class="privacy-card">
                 <p class="privacy-card-label">▶ HOW WE USE YOUR INFORMATION</p>
                 <p>We use the information we collect to process orders, send order confirmations, and improve our services. We do not sell or share your personal information with third parties except as necessary to process payments via Stripe.</p>
             </div>
         </div>
-
         <div class="col-md-6">
             <div class="privacy-card">
                 <p class="privacy-card-label">▶ AUTHENTICATION</p>
                 <p>We use ASP.NET Core Identity for local authentication. You may also sign in using Google or GitHub OAuth — in these cases, we only receive your email address and display name from the provider.</p>
             </div>
         </div>
-
         <div class="col-md-6">
             <div class="privacy-card">
                 <p class="privacy-card-label">▶ PAYMENTS</p>
                 <p>All payments are processed securely through Stripe. We do not store your credit card information on our servers.</p>
             </div>
         </div>
-
         <div class="col-md-6">
             <div class="privacy-card">
                 <p class="privacy-card-label">▶ COOKIES</p>
                 <p>We use cookies to maintain your session and authentication state. No third-party tracking cookies are used.</p>
             </div>
         </div>
-
         <div class="col-md-6">
             <div class="privacy-card privacy-card-accent">
                 <p class="privacy-card-label">▶ CONTACT</p>
                 <p>If you have any questions about this privacy policy, please contact us at <a href="mailto:admin@gc.ca">admin@gc.ca</a>.</p>
             </div>
         </div>
-
     </div>
 </div>

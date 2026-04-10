@@ -4,7 +4,8 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-
+<!-- Used Claude (Anthropic) to help generate the base wrapper/container structure (outer wrapper div with header, body, and action divs inside) which was then reused across multiple views in the project. 
+     (https://claude.ai) -->
 <div class="home-main-container">
 
     <div class="home-label">▶ CLASSIFIED SYSTEM</div>
@@ -19,6 +20,7 @@
     }
     else
     {
+        <!-- Displaying a message for a user that before using our website, he needs to log in -->
         <p class="home-sub">
             Access to the Shop is classified. 🕵♂️<br />
             If you're seeing this, you're not cleared yet.<br />
@@ -29,7 +31,7 @@
             <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-outline-lime home-btn">Register</a>
         </div>
     }
-
+    <!-- Added some interactivity for users to understand how secret our platform is :) -->
     <div class="home-stats">
         <div class="home-stat-card">
             <span class="home-stat-label">▶ STATUS</span>

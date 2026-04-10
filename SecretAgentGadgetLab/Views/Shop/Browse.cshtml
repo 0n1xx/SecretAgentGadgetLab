@@ -3,12 +3,13 @@
     ViewData["Title"] = "Gadgets";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<!-- Used Claude (Anthropic) to help generate the base wrapper/container structure (outer wrapper div with header, body, and action divs inside) which was then reused across multiple views in the project.
+     (https://claude.ai) -->
 <div class="browse-main-container">
 
     <p class="browse-header-label">▶ EQUIPMENT CATALOG</p>
     <h1 class="browse-header-title">Gadgets</h1>
-
+    <!-- If there are no gadgets, displaying the following div -->
     @if (!Model.Any())
     {
         <div class="browse-empty">
@@ -20,6 +21,7 @@
     else
     {
         <section class="browse-grid">
+            <!-- Generating cards for every gadget with a photo, description and some interactive buttons for all users -->
             @foreach (var item in Model)
             {
                 <div class="browse-card">
