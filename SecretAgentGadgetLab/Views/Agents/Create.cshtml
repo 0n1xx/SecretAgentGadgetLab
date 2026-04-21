@@ -1,49 +1,89 @@
 ﻿@model SecretAgentGadgetLab.Models.Agent
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "New Agent";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1>Create</h1>
-<h4>Agent</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="CodeName" class="control-label"></label>
-                <input asp-for="CodeName" class="form-control" />
-                <span asp-validation-for="CodeName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CountryCode" class="control-label"></label>
-                <select asp-for="CountryCode" class="form-select">
-                    <option value="">Select Country</option>
-                    <option value="CA">Canada</option>
-                    <option value="RU">Russia</option>
-                    <option value="BY">Belarus</option>
-                    <option value="FR">France</option>
-                </select>
-                <span asp-validation-for="CountryCode" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Salary" class="control-label"></label>
-                <input asp-for="Salary" class="form-control" />
-                <span asp-validation-for="Salary" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<!-- Used Claude (Anthropic) to help generate the base wrapper/container structure (outer wrapper div with header, body, and action divs inside) which was then reused across multiple views in the project -->
+<div class="create-wrapper">
+    <!-- Header -->
+    <div class="create-header">
+        <div class="create-header-icon">🕵️</div>
+        <div>
+            <p class="create-header-label">CLASSIFIED OPERATION</p>
+            <h1 class="create-header-title">Recruit New Agent</h1>
+        </div>
+    </div>
+    <!-- Clearance banner -->
+    <div class="create-clearance-banner">
+        <span class="create-clearance-dot"></span>
+        <span>SECURITY CLEARANCE REQUIRED — ADMIN EYES ONLY</span>
+    </div>
+    <!-- Form card -->
+    <div class="create-card">
+        <div class="create-card-topbar">
+            <span class="create-card-topbar-label">AGENT REGISTRATION FORM</span>
+            <span class="create-card-topbar-id">FORM-AGT-001</span>
+        </div>
+        <div class="create-card-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="create-error-box"></div>
+                <!-- Code Name -->
+                <div class="create-field">
+                    <label asp-for="CodeName" class="create-field-label">
+                        <span class="create-field-icon">⬡</span> Code Name
+                    </label>
+                    <div class="create-input-wrap">
+                        <input asp-for="CodeName" class="create-input" placeholder="e.g. SHADOW WOLF" autocomplete="off" />
+                    </div>
+                    <span asp-validation-for="CodeName" class="create-field-error"></span>
+                    <p class="create-field-hint">Operative's classified alias — no real names permitted.</p>
+                </div>
+                <!-- Country -->
+                <div class="create-field">
+                    <label asp-for="CountryCode" class="create-field-label">
+                        <span class="create-field-icon">⬡</span> Country of Origin
+                    </label>
+                    <div class="create-select-wrap">
+                        <select asp-for="CountryCode" class="create-select">
+                            <option value="">— Select Country —</option>
+                            <option value="CA"> Canada</option>
+                            <option value="RU"> Russia</option>
+                            <option value="BY"> Belarus</option>
+                            <option value="FR"> France</option>
+                        </select>
+                        <span class="create-select-arrow">▾</span>
+                    </div>
+                    <span asp-validation-for="CountryCode" class="create-field-error"></span>
+                </div>
+                <!-- Salary -->
+                <div class="create-field">
+                    <label asp-for="Salary" class="create-field-label">
+                        <span class="create-field-icon">⬡</span> Annual Salary (CAD)
+                    </label>
+                    <div class="create-input-wrap create-input-prefix-wrap">
+                        <span class="create-input-prefix">$</span>
+                        <input asp-for="Salary" class="create-input create-input-prefixed" placeholder="75000" type="number" />
+                    </div>
+                    <span asp-validation-for="Salary" class="create-field-error"></span>
+                    <p class="create-field-hint">Compensation is classified. Payroll access restricted.</p>
+                </div>
+                <hr class="create-divider" />
+                <!-- Actions -->
+                <div class="create-actions">
+                    <button type="submit" class="create-btn-submit">
+                        <span>⊕</span> ENLIST AGENT
+                    </button>
+                    <a asp-action="Index" class="create-btn-cancel">✕ Abort Mission</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Back link -->
+    <div class="create-footer-link">
+        <a asp-action="Index">← Back to Agent Registry</a>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

@@ -1,50 +1,109 @@
 ﻿@model SecretAgentGadgetLab.Models.Gadget
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "New Gadget";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1>Create</h1>
-<h4>Gadget</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Photo" class="control-label"></label>
-                <input asp-for="Photo" type="file" class="form-control" />
-                <span asp-validation-for="Photo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AgentId" class="control-label"></label>
-                <select asp-for="AgentId" class ="form-control" asp-items="ViewBag.AgentId"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<!-- Used Claude (Anthropic) to help generate the base wrapper/container structure (outer wrapper div with header, body, and action divs inside) which was then reused across multiple views in the project -->
+<div class="create-wrapper">
+    <!-- Header -->
+    <div class="create-header">
+        <div>
+            <p class="create-header-label">Q-BRANCH INVENTORY</p>
+            <h1 class="create-header-title">Register New Gadget</h1>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
+    <!-- Clearance banner -->
+    <div class="create-clearance-banner create-clearance-banner--gadget">
+        <span class="create-clearance-dot"></span>
+        <span>PROTOTYPE SUBMISSION — Q-BRANCH AUTHORIZATION REQUIRED</span>
+    </div>
+    <!-- Form card -->
+    <div class="create-card">
+        <div class="create-card-topbar">
+            <span class="create-card-topbar-label">GADGET SPECIFICATION FORM</span>
+            <span class="create-card-topbar-id">FORM-GDG-001</span>
+        </div>
+        <div class="create-card-body">
+            <form asp-action="Create" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="create-error-box"></div>
+                <!-- Two-column row: Name + Price -->
+                <div class="create-row-2col">
+                    <div class="create-field">
+                        <label asp-for="Name" class="create-field-label">
+                            <span class="create-field-icon">⬡</span> Gadget Name
+                        </label>
+                        <div class="create-input-wrap">
+                            <input asp-for="Name" class="create-input" placeholder="e.g. EMP Wristwatch" autocomplete="off" />
+                        </div>
+                        <span asp-validation-for="Name" class="create-field-error"></span>
+                    </div>
+                    <div class="create-field">
+                        <label asp-for="Price" class="create-field-label">
+                            <span class="create-field-icon">⬡</span> Unit Price (CAD)
+                        </label>
+                        <div class="create-input-wrap create-input-prefix-wrap">
+                            <span class="create-input-prefix">$</span>
+                            <input asp-for="Price" class="create-input create-input-prefixed" placeholder="299.99" type="number" step="0.01" />
+                        </div>
+                        <span asp-validation-for="Price" class="create-field-error"></span>
+                    </div>
+                </div>
+                <!-- Description -->
+                <div class="create-field">
+                    <label asp-for="Description" class="create-field-label">
+                        <span class="create-field-icon">⬡</span> Technical Description
+                    </label>
+                    <div class="create-input-wrap">
+                        <textarea asp-for="Description" class="create-textarea" rows="3" placeholder="Describe capabilities, materials, operational range..."></textarea>
+                    </div>
+                    <span asp-validation-for="Description" class="create-field-error"></span>
+                    <p class="create-field-hint">Keep it classified. Avoid mentioning weaknesses.</p>
+                </div>
+                <!-- Photo upload -->
+                <div class="create-field">
+                    <label asp-for="Photo" class="create-field-label">
+                        <span class="create-field-icon">⬡</span> Product Photo
+                    </label>
+                    <div class="create-file-drop-zone" id="fileDropZone">
+                        <div class="create-file-drop-inner">
+                            <span class="create-file-icon">📎</span>
+                            <span class="create-file-label" id="fileLabel">Drop image here or click to browse</span>
+                            <span class="create-file-hint">PNG, JPG, WEBP — max 5MB</span>
+                        </div>
+                        <input asp-for="Photo" type="file" class="create-file-input" id="photoInput" accept="image/*" />
+                    </div>
+                    <span asp-validation-for="Photo" class="create-field-error"></span>
+                </div>
+                <!-- Assigned Agent -->
+                <div class="create-field">
+                    <label asp-for="AgentId" class="create-field-label">
+                        <span class="create-field-icon">⬡</span> Assigned Agent
+                    </label>
+                    <div class="create-select-wrap">
+                        <select asp-for="AgentId" class="create-select" asp-items="ViewBag.AgentId">
+                            <option value="">— Unassigned —</option>
+                        </select>
+                        <span class="create-select-arrow">▾</span>
+                    </div>
+                    <span asp-validation-for="AgentId" class="create-field-error"></span>
+                    <p class="create-field-hint">Gadget will be attributed to this operative's field kit.</p>
+                </div>
+                <hr class="create-divider" />
+                <!-- Actions -->
+                <div class="create-actions">
+                    <button type="submit" class="create-btn-submit">
+                        <span>⊕</span> SUBMIT TO Q-BRANCH
+                    </button>
+                    <a asp-action="Index" class="create-btn-cancel">✕ Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Back link -->
+    <div class="create-footer-link">
+        <a asp-action="Index">← Back to Gadget Inventory</a>
+    </div>
 </div>
 
 @section Scripts {
