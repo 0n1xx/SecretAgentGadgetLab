@@ -71,4 +71,8 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+    <script>
+        // Remove client-side required validation for Photo on edit
+        $("input[name='Photo']").rules("remove", "required");
+    </script>
 }
