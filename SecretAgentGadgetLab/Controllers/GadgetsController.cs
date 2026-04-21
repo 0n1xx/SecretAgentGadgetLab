@@ -104,7 +104,7 @@ namespace SecretAgentGadgetLab.Controllers
 
             if (ModelState.IsValid)
             {
-                // If new image uploaded → replace old one
+                // If new image uploaded → replace old one, otherwise keep existing photo
                 if (Photo != null && Photo.Length > 0)
                 {
                     using var stream = Photo.OpenReadStream();
@@ -115,6 +115,16 @@ namespace SecretAgentGadgetLab.Controllers
                     };
                     var uploadResult = await _cloudinary.UploadAsync(uploadParams);
                     gadget.Photo = uploadResult.SecureUrl.ToString();
+                }
+                else
+                {
+                    // No new photo selected — preserve the existing one from the database
+                    var existingPhoto = await _context.Gadgets
+                        .AsNoTracking()
+                        .Where(g => g.Id == id)
+                        .Select(g => g.Photo)
+                        .FirstOrDefaultAsync();
+                    gadget.Photo = existingPhoto;
                 }
 
                 try
