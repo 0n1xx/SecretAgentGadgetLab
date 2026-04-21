@@ -82,7 +82,6 @@ namespace SecretAgentGadgetLab.Controllers
             ViewData["AgentId"] = new SelectList(_context.Agents, "Id", "CodeName", gadget.AgentId);
             return View(gadget);
         }
-
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
