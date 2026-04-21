@@ -48,4 +48,4 @@ Users can:
 
 ## Author
 
-Vladislav Sakharov | 200625361 | COMP 2084 – Server-Side Scripting (ASP.NET)
+Vladislav Sakharov
