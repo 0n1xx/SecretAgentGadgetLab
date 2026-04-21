@@ -3,8 +3,8 @@ WORKDIR /app
 
 COPY . . 
 
-RUN dotnet restore SecretAgentGadgetLab/SecretAgentGadgetLab.csproj
-RUN dotnet publish SecretAgentGadgetLab/SecretAgentGadgetLab.csproj -c Release -o out
+RUN dotnet restore SecretAgentGadgetLab/SecretAgentGadgetLab/SecretAgentGadgetLab.csproj
+RUN dotnet publish SecretAgentGadgetLab/SecretAgentGadgetLab/SecretAgentGadgetLab.csproj -c Release -o out
 
 FROM mcr.microsoft.com/dotnet/aspnet:10.0
 WORKDIR /app
