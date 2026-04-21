@@ -102,6 +102,9 @@ namespace SecretAgentGadgetLab.Controllers
         {
             if (id != gadget.Id) return NotFound();
 
+            // Photo is optional on edit — remove it from validation
+            ModelState.Remove("Photo");
+
             if (ModelState.IsValid)
             {
                 // If new image uploaded → replace old one, otherwise keep existing photo

@@ -40,9 +40,15 @@
             <hr class="edit-divider" />
             <div class="edit-field">
                 <p class="edit-section-label">Field / Visual</p>
-                <label asp-for="Photo">Photo</label>
-                <input asp-for="Photo" type="file" class="edit-file-input" />
-                <span asp-validation-for="Photo" class="text-danger"></span>
+                <label for="Photo">Photo</label>
+                @if (!string.IsNullOrEmpty(Model.Photo))
+                {
+                    <div class="mb-2">
+                        <img src="@Model.Photo" alt="Current photo" style="max-height:120px; border-radius:6px;" />
+                        <p class="text-muted" style="font-size:0.8rem; margin-top:4px;">Current photo — leave blank to keep it</p>
+                    </div>
+                }
+                <input type="file" name="Photo" id="Photo" class="edit-file-input" />
             </div>
             <hr class="edit-divider" />
             <div class="edit-field">
