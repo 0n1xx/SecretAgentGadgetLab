@@ -3851,13 +3851,496 @@ footer.footer,
     padding-top: 0.25rem;
 }
 
-.create-footer-link a {
-    color: #374151;
-    font-size: 0.82rem;
-    text-decoration: none;
-    transition: color 0.2s;
+    .create-footer-link a {
+        color: #374151;
+        font-size: 0.82rem;
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+
+        .create-footer-link a:hover {
+            color: #a3ff12;
+        }
+
+
+/* ============================================================
+   MANAGE ACCOUNT — Secret Agent Lab
+   ============================================================ */
+
+/* Outer wrapper */
+.manage-wrapper {
+    max-width: 960px;
+    margin: 2.5rem auto;
+    padding: 0 1rem 3rem;
 }
 
-.create-footer-link a:hover {
+/* Header block */
+.manage-header {
+    margin-bottom: 2rem;
+}
+
+.manage-header-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
     color: #a3ff12;
+    margin-bottom: 0.4rem;
+}
+
+.manage-header-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #fff;
+    margin: 0 0 0.2rem;
+    letter-spacing: -0.5px;
+}
+
+@media (min-width: 768px) {
+    .manage-header-title {
+        font-size: 2.4rem;
+    }
+}
+
+.manage-header-sub {
+    color: #6b7280;
+    font-size: 0.95rem;
+    margin: 0 0 1.25rem;
+}
+
+.manage-header-divider {
+    border: none;
+    border-top: 1px solid #1f2937;
+    margin: 0;
+}
+
+/* Two-column layout: nav + content */
+.manage-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-top: 1.5rem;
+}
+
+@media (min-width: 700px) {
+    .manage-layout {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 2.5rem;
+    }
+}
+
+/* Left nav */
+.manage-nav {
+    display: flex;
+    flex-direction: column;
+    min-width: 190px;
+    gap: 0.1rem;
+}
+
+.manage-nav-link {
+    display: block;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    color: #6b7280;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: color 0.2s, background 0.2s;
+    letter-spacing: 0.3px;
+}
+
+    .manage-nav-link:hover {
+        color: #a3ff12;
+        background: rgba(163, 255, 18, 0.05);
+    }
+
+    /* Active nav item */
+    .manage-nav-link.active {
+        background-color: rgba(163, 255, 18, 0.12);
+        color: #a3ff12 !important;
+        font-weight: 600;
+        border-left: 2px solid #a3ff12;
+    }
+
+/* Right content area */
+.manage-content {
+    flex: 1;
+}
+
+.manage-section-label {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 1.25rem;
+    letter-spacing: 0.3px;
+}
+
+/* Form layout */
+.manage-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    max-width: 520px;
+}
+
+.manage-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.manage-field-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #4b5563;
+}
+
+.manage-input {
+    background: #111 !important;
+    border: 1px solid #1f2937 !important;
+    border-radius: 6px;
+    color: #a3ff12 !important;
+    padding: 12px 14px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    width: 100%;
+}
+
+    .manage-input:focus {
+        border-color: #a3ff12 !important;
+        box-shadow: 0 0 0 2px rgba(163, 255, 18, 0.12) !important;
+    }
+
+    .manage-input::placeholder {
+        color: #374151 !important;
+    }
+
+    .manage-input:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+    }
+
+/* Input with inline badge */
+.manage-input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+    .manage-input-group .manage-input {
+        flex: 1;
+    }
+
+.manage-badge-confirmed {
+    background: rgba(163, 255, 18, 0.12);
+    color: #a3ff12;
+    border: 1px solid rgba(163, 255, 18, 0.3);
+    border-radius: 99px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 3px 10px;
+    white-space: nowrap;
+}
+
+.manage-field-action {
+    margin-top: 0.35rem;
+}
+
+/* Primary action button */
+.manage-btn-primary {
+    background-color: #a3ff12;
+    color: #000;
+    border: none;
+    border-radius: 6px;
+    padding: 13px 28px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.15s;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+    .manage-btn-primary:hover {
+        background-color: #ccff66;
+        color: #000;
+        transform: translateY(-1px);
+    }
+
+/* Secondary button */
+.manage-btn-secondary {
+    background: transparent;
+    color: #a3ff12;
+    border: 1px solid #a3ff12;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-weight: 600;
+    font-size: 0.82rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, transform 0.15s;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+    .manage-btn-secondary:hover {
+        background: rgba(163, 255, 18, 0.1);
+        color: #ccff66;
+        transform: translateY(-1px);
+    }
+
+/* Danger button */
+.manage-btn-danger {
+    background: transparent;
+    color: #ff4444;
+    border: 1px solid #ff4444;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-weight: 600;
+    font-size: 0.82rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+    .manage-btn-danger:hover {
+        background: rgba(255, 68, 68, 0.1);
+        color: #ff6666;
+        transform: translateY(-1px);
+    }
+
+/* External provider buttons */
+.manage-btn-ext {
+    background-color: #a3ff12;
+    color: #000;
+    border: none;
+    border-radius: 6px;
+    padding: 11px 22px;
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.15s;
+}
+
+    .manage-btn-ext:hover {
+        background-color: #ccff66;
+        transform: translateY(-1px);
+    }
+
+/* Error box */
+.manage-error-box {
+    background: rgba(255, 68, 68, 0.06);
+    border: 1px solid rgba(255, 68, 68, 0.25);
+    border-radius: 6px;
+    padding: 9px 13px;
+    font-size: 0.82rem;
+}
+
+    .manage-error-box:empty {
+        display: none;
+    }
+
+    .manage-error-box ul {
+        margin: 0;
+        padding-left: 1rem;
+    }
+
+/* Warning box */
+.manage-warning-box {
+    background: rgba(255, 200, 0, 0.06);
+    border: 1px solid rgba(255, 200, 0, 0.25);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+    color: #fbbf24;
+}
+
+    .manage-warning-box p {
+        margin: 0.35rem 0 0;
+        color: #9ca3af;
+    }
+
+    .manage-warning-box a {
+        color: #a3ff12;
+    }
+
+.manage-warning-box--destructive {
+    background: rgba(255, 68, 68, 0.06);
+    border-color: rgba(255, 68, 68, 0.25);
+    color: #ff6b6b;
+}
+
+/* Subsection title */
+.manage-subsection {
+    margin-top: 1.5rem;
+}
+
+.manage-subsection-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #4b5563;
+    margin-bottom: 1rem;
+}
+
+/* External logins list */
+.manage-ext-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+}
+
+.manage-ext-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #111;
+    border: 1px solid #1f2937;
+    border-radius: 6px;
+    padding: 10px 14px;
+}
+
+.manage-ext-name {
+    color: #d1d5db;
+    font-size: 0.9rem;
+}
+
+.manage-ext-remove-form {
+    margin: 0;
+}
+
+.manage-ext-add-form {
+    margin-top: 0.5rem;
+}
+
+.manage-ext-btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+/* 2FA status badge */
+.manage-2fa-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 99px;
+    margin-bottom: 1.25rem;
+}
+
+.manage-2fa-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.manage-2fa-active {
+    background: rgba(163, 255, 18, 0.1);
+    border: 1px solid rgba(163, 255, 18, 0.3);
+    color: #a3ff12;
+}
+
+    .manage-2fa-active .manage-2fa-dot {
+        background: #a3ff12;
+        box-shadow: 0 0 6px #a3ff12;
+    }
+
+.manage-2fa-inactive {
+    background: rgba(255, 68, 68, 0.06);
+    border: 1px solid rgba(255, 68, 68, 0.25);
+    color: #ff6b6b;
+}
+
+    .manage-2fa-inactive .manage-2fa-dot {
+        background: #ff4444;
+    }
+
+.manage-2fa-btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+/* Personal data page */
+.manage-personal-data-desc {
+    color: #9ca3af;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    max-width: 480px;
+}
+
+.manage-personal-data-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+/* Authenticator page */
+.manage-auth-intro {
+    color: #9ca3af;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.manage-auth-steps {
+    color: #9ca3af;
+    font-size: 0.88rem;
+    padding-left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+    .manage-auth-steps a {
+        color: #a3ff12;
+    }
+
+.manage-auth-key {
+    background: #1a1a1a;
+    border: 1px solid #1f2937;
+    border-radius: 4px;
+    color: #a3ff12;
+    font-family: monospace;
+    font-size: 0.82rem;
+    padding: 3px 8px;
+    letter-spacing: 2px;
+    word-break: break-all;
+}
+
+.manage-auth-qr-box {
+    margin-top: 0.75rem;
+    padding: 14px;
+    background: #111;
+    border: 1px solid #1f2937;
+    border-radius: 8px;
+    display: inline-block;
 }

@@ -1,0 +1,29 @@
+﻿@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout != null)
+    {
+        Layout = parentLayout.ToString();
+    }
+    else
+    {
+        Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+    }
+}
+
+<div class="manage-wrapper">
+    <div class="manage-header">
+        <div class="manage-header-label">&#9658; Agent Control Panel</div>
+        <h1 class="manage-header-title">Manage your account</h1>
+        <p class="manage-header-sub">Change your account settings</p>
+        <div class="manage-header-divider"></div>
+    </div>
+    <div class="manage-layout">
+        <partial name="_ManageNav" />
+        <div class="manage-content">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

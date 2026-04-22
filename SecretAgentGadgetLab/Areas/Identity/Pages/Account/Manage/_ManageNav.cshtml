@@ -1,0 +1,15 @@
+﻿@{
+    var activePage = ViewData["ActivePage"] as string ?? ManageNavPages.Index;
+
+    string NavClass(string page, string comparePage) =>
+        string.Equals(page, comparePage, StringComparison.OrdinalIgnoreCase) ? "active" : "";
+}
+
+<nav class="manage-nav">
+    <a class="manage-nav-link @NavClass(activePage, ManageNavPages.Index)" asp-page="./Index">Profile</a>
+    <a class="manage-nav-link @NavClass(activePage, ManageNavPages.Email)" asp-page="./Email">Email</a>
+    <a class="manage-nav-link @NavClass(activePage, ManageNavPages.ChangePassword)" asp-page="./ChangePassword">Password</a>
+    <a class="manage-nav-link @NavClass(activePage, ManageNavPages.ExternalLogins)" asp-page="./ExternalLogins">External logins</a>
+    <a class="manage-nav-link @NavClass(activePage, ManageNavPages.TwoFactorAuthentication)" asp-page="./TwoFactorAuthentication">Two-factor authentication</a>
+    <a class="manage-nav-link @NavClass(activePage, ManageNavPages.PersonalData)" asp-page="./PersonalData">Personal data</a>
+</nav>
