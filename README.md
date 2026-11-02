@@ -1,48 +1,45 @@
 # SecretAgentGadgetLab
 
-## Overview
-- SecretAgentGadgetLab is an ASP.NET Core MVC web application developed for COMP 2084 – Server-Side Scripting (ASP.NET).
-The application allows secret belorussian users to manage secret agents and their gadgets through a clean and user-friendly interface :)
+Demo e-commerce app built with ASP.NET Core MVC for COMP 2084 (Server-Side Scripting).  
+Browse fictional spy-themed gadgets, create an account, check out with Stripe (test mode), and manage catalog data as an admin.
+
+**Live:** [https://secretagentlab.store](https://secretagentlab.store)
+
 ---
 
 ## Features
-- Browse gadgets by secret agent
-- Full shopping cart with quantity management
-- Checkout flow with shipping information
-- Stripe payment integration (test mode)
-- Order history for customers
-- Full CRUD operations for Administrators:
-  - Agents
-  - Gadgets
-  - Orders
-- Image upload support via Cloudinary
-- Authentication:
-  - Local user registration and login
-  - Google OAuth login
-  - GitHub OAuth login
-- Authorization:
-  - Only authenticated users can access the shop
-  - Only administrators can manage agents, gadgets, and orders
 
-## Technologies Used
-- ASP.NET Core MVC
+- Browse gadgets by secret agent
+- Shopping cart with quantity management
+- Checkout with shipping info + Stripe payments (test mode)
+- Customer order history
+- Admin CRUD for agents, gadgets, and orders
+- Image uploads via Cloudinary
+- Auth:
+  - Email / password registration with email confirmation (Resend)
+  - Google OAuth
+  - GitHub OAuth
+- Roles: authenticated customers can shop; administrators manage catalog and orders
+
+---
+
+## Stack
+
+- ASP.NET Core MVC + Identity
 - C#
 - Microsoft SQL Server
 - Bootstrap
-- OAuth (Google & GitHub)
+- Stripe, Cloudinary, Resend
+- Google & GitHub OAuth
+- Hosted on Railway (`secretagentlab.store`)
 
-## Authentication
-This application uses ASP.NET Core Identity for authentication.
+---
 
-Users can:
-- Register and log in using email and password
-- Sign in using Google
-- Sign in using GitHub
-- Only authenticated users have access to Create, Edit, and Delete operations.
+## Auth notes
 
-## Live Demo
-
-[https://secretagentlab.store](https://secretagentlab.store)
+- New local accounts must confirm email before sign-in
+- Google / GitHub sign-in is used only for account authentication (email + display name)
+- Google Sign-In branding is verified for production
 
 ---
 
