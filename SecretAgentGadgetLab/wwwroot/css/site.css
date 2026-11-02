@@ -638,6 +638,30 @@ footer.footer,
     margin: 0 auto 1.5rem;
 }
 
+.home-purpose {
+    text-align: left;
+    color: #d1d5db;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin: 0 auto 1.75rem;
+    padding: 1rem 1.1rem;
+    border: 1px solid rgba(163, 255, 18, 0.25);
+    background: rgba(163, 255, 18, 0.04);
+}
+
+.home-purpose p {
+    margin-bottom: 0.75rem;
+}
+
+.home-purpose p:last-child {
+    margin-bottom: 0;
+}
+
+.home-purpose a {
+    color: #a3ff12;
+    text-decoration: underline;
+}
+
 .home-sub {
     color: #6b7280;
     font-size: 0.95rem;

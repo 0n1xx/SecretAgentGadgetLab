@@ -42,7 +42,7 @@ Users can:
 
 ## Live Demo
 
-[https://secret-agent-lab.up.railway.app](https://secret-agent-lab.up.railway.app)
+[https://secretagentlab.store](https://secretagentlab.store)
 
 ---
 

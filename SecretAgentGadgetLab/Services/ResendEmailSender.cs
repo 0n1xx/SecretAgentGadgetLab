@@ -33,7 +33,7 @@ namespace SecretAgentGadgetLab.Services
                 return;
             }
 
-            var fromAddress = _config["Email:FromAddress"] ?? "noreply@statify.one";
+            var fromAddress = _config["Email:FromAddress"] ?? "noreply@secretagentlab.store";
             var fromName = _config["Email:FromName"] ?? "Secret Agent Gadget Lab";
 
             var payload = new

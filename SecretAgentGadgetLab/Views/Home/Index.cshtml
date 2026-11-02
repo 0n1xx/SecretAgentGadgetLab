@@ -13,6 +13,22 @@
 
     <div class="home-divider"></div>
 
+    @* Plain-language purpose for Google OAuth branding verification (must be visible without login). *@
+    <div class="home-purpose">
+        <p>
+            <strong>Secret Agent Gadget Lab</strong> is a demo online shop and learning project built with ASP.NET.
+            Visitors can browse fictional spy-themed gadgets, create an account, and place demo orders.
+        </p>
+        <p>
+            Sign-in with Google is used only to authenticate your shop account. This application does not use Google APIs
+            to create or distribute intimate imagery. See our
+            <a asp-controller="Home" asp-action="Privacy">Privacy Policy</a>
+            and
+            <a asp-controller="Home" asp-action="About">About</a>
+            pages for details.
+        </p>
+    </div>
+
     @if (SignInManager.IsSignedIn(User))
     {
         <p class="home-sub">Identity confirmed. You are cleared for access, agent.</p>
