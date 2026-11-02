@@ -31,5 +31,11 @@ namespace SecretAgentGadgetLab.Controllers
         {
             return View();
         }
+
+        // Plain public page for Google OAuth branding verification (fresh URL, no login wall).
+        public IActionResult AppHome()
+        {
+            return View();
+        }
     }
 }

@@ -1,0 +1,40 @@
+@{
+    ViewData["Title"] = "SecretAgentGadgetLab";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4" style="max-width: 720px;">
+    <h1>SecretAgentGadgetLab</h1>
+    <p>
+        <strong>SecretAgentGadgetLab</strong> is a demo e-commerce web application and ASP.NET portfolio project.
+        Users can browse a catalog of fictional spy-themed gadgets, create an account, manage a shopping cart,
+        and place demo orders with test Stripe payments.
+    </p>
+    <h2>Features</h2>
+    <ul>
+        <li>Browse gadgets curated by fictional secret agents</li>
+        <li>Register / sign in, cart, checkout, and order history</li>
+        <li>Administrator CRUD for agents, gadgets, and orders</li>
+    </ul>
+    <h2>How we use Google Sign-In</h2>
+    <p>
+        Google Sign-In is used only to authenticate users into their SecretAgentGadgetLab shop account.
+        We request basic profile information (email and display name) so we can create or recognize that account.
+        We do not use Google user data for advertising, training AI models, or any purpose unrelated to account sign-in.
+    </p>
+    <p>
+        SecretAgentGadgetLab does not use Google APIs for AI-generated non-consensual intimate imagery (AI NCII).
+    </p>
+    <h2>Privacy</h2>
+    <p>
+        Read our
+        <a href="https://secretagentlab.store/Home/Privacy">Privacy Policy</a>
+        for details on what data we collect and how it is used.
+        Questions: <a href="mailto:vladsahar27@gmail.com">vladsahar27@gmail.com</a>.
+    </p>
+    <p>
+        <a asp-controller="Home" asp-action="Index">Enter the shop homepage</a>
+        ·
+        <a asp-controller="Home" asp-action="About">About</a>
+    </p>
+</div>
