@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using SecretAgentGadgetLab.Data;
+using SecretAgentGadgetLab.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,11 +11,16 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
-    options.SignIn.RequireConfirmedAccount = false)
+{
+    options.SignIn.RequireConfirmedAccount = true;
+    options.SignIn.RequireConfirmedEmail = true;
+})
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient("resend");
+builder.Services.AddTransient<IEmailSender, ResendEmailSender>();
 
 builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 

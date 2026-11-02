@@ -1,0 +1,25 @@
+@page
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Check your email";
+}
+<div class="login-wrapper">
+    <div class="login-card" style="max-width:520px;margin:0 auto;">
+        <div class="login-section-label">&#9658; Inbox check</div>
+        <h1 class="login-section-title">Check your email</h1>
+        <p class="login-section-sub">
+            @if (!string.IsNullOrEmpty(Model.Email))
+            {
+                <text>We sent a confirmation link to <strong>@Model.Email</strong>. Open it to activate your account, then sign in.</text>
+            }
+            else
+            {
+                <text>We sent a confirmation link to your inbox. Open it to activate your account, then sign in.</text>
+            }
+        </p>
+        <div class="login-divider"></div>
+        <a class="login-btn-primary" asp-page="./Login" style="display:inline-block;text-align:center;text-decoration:none;">
+            &#9658; Back to sign in
+        </a>
+    </div>
+</div>
